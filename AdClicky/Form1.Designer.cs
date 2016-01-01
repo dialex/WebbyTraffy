@@ -30,20 +30,20 @@
         {
             this.txtUrl = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
-            this.btnAction = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
-            this.button1 = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnActionBrowser = new System.Windows.Forms.Button();
+            this.grpConfigs = new System.Windows.Forms.GroupBox();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.chkConfigSimulateBrowser = new System.Windows.Forms.CheckBox();
             this.lblTotalCalls = new System.Windows.Forms.Label();
             this.txtLogger = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.lblLogger = new System.Windows.Forms.Label();
-            this.groupBox1.SuspendLayout();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.button2 = new System.Windows.Forms.Button();
+            this.grpConfigs.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtUrl
@@ -59,16 +59,6 @@
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(219, 20);
             this.textBox2.TabIndex = 1;
-            // 
-            // btnAction
-            // 
-            this.btnAction.Location = new System.Drawing.Point(99, 155);
-            this.btnAction.Name = "btnAction";
-            this.btnAction.Size = new System.Drawing.Size(75, 23);
-            this.btnAction.TabIndex = 2;
-            this.btnAction.Text = "Make call";
-            this.btnAction.UseVisualStyleBackColor = true;
-            this.btnAction.Click += new System.EventHandler(this.btnAction_Click);
             // 
             // label1
             // 
@@ -102,27 +92,27 @@
             this.webBrowser1.TabIndex = 5;
             this.webBrowser1.WebBrowserShortcutsEnabled = false;
             // 
-            // button1
+            // btnActionBrowser
             // 
-            this.button1.Location = new System.Drawing.Point(356, 154);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "Use browser";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnActionBrowser.Location = new System.Drawing.Point(356, 154);
+            this.btnActionBrowser.Name = "btnActionBrowser";
+            this.btnActionBrowser.Size = new System.Drawing.Size(75, 23);
+            this.btnActionBrowser.TabIndex = 6;
+            this.btnActionBrowser.Text = "Use browser";
+            this.btnActionBrowser.UseVisualStyleBackColor = true;
+            this.btnActionBrowser.Click += new System.EventHandler(this.btnActionBrowser_Click);
             // 
-            // groupBox1
+            // grpConfigs
             // 
-            this.groupBox1.Controls.Add(this.checkBox3);
-            this.groupBox1.Controls.Add(this.checkBox2);
-            this.groupBox1.Controls.Add(this.checkBox1);
-            this.groupBox1.Location = new System.Drawing.Point(548, 12);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(310, 182);
-            this.groupBox1.TabIndex = 7;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "groupBox1";
+            this.grpConfigs.Controls.Add(this.checkBox3);
+            this.grpConfigs.Controls.Add(this.checkBox2);
+            this.grpConfigs.Controls.Add(this.chkConfigSimulateBrowser);
+            this.grpConfigs.Location = new System.Drawing.Point(548, 12);
+            this.grpConfigs.Name = "grpConfigs";
+            this.grpConfigs.Size = new System.Drawing.Size(310, 182);
+            this.grpConfigs.TabIndex = 7;
+            this.grpConfigs.TabStop = false;
+            this.grpConfigs.Text = "Configurations";
             // 
             // checkBox3
             // 
@@ -146,21 +136,23 @@
             this.checkBox2.Text = "checkBox2";
             this.checkBox2.UseVisualStyleBackColor = true;
             // 
-            // checkBox1
+            // chkConfigSimulateBrowser
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.checkBox1.Location = new System.Drawing.Point(6, 19);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(80, 17);
-            this.checkBox1.TabIndex = 0;
-            this.checkBox1.Text = "checkBox1";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.chkConfigSimulateBrowser.AutoSize = true;
+            this.chkConfigSimulateBrowser.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chkConfigSimulateBrowser.Checked = true;
+            this.chkConfigSimulateBrowser.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkConfigSimulateBrowser.Location = new System.Drawing.Point(6, 19);
+            this.chkConfigSimulateBrowser.Name = "chkConfigSimulateBrowser";
+            this.chkConfigSimulateBrowser.Size = new System.Drawing.Size(112, 17);
+            this.chkConfigSimulateBrowser.TabIndex = 0;
+            this.chkConfigSimulateBrowser.Text = "Simulate Browsers";
+            this.chkConfigSimulateBrowser.UseVisualStyleBackColor = true;
             // 
             // lblTotalCalls
             // 
             this.lblTotalCalls.AutoSize = true;
-            this.lblTotalCalls.Location = new System.Drawing.Point(180, 160);
+            this.lblTotalCalls.Location = new System.Drawing.Point(437, 159);
             this.lblTotalCalls.Name = "lblTotalCalls";
             this.lblTotalCalls.Size = new System.Drawing.Size(31, 13);
             this.lblTotalCalls.TabIndex = 8;
@@ -177,15 +169,6 @@
             this.txtLogger.Size = new System.Drawing.Size(460, 262);
             this.txtLogger.TabIndex = 9;
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(0, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 13);
-            this.label3.TabIndex = 10;
-            this.label3.Text = "label3";
-            // 
             // lblLogger
             // 
             this.lblLogger.AutoSize = true;
@@ -195,27 +178,40 @@
             this.lblLogger.TabIndex = 11;
             this.lblLogger.Text = "What\'s happening under the hood:";
             // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(278, 25);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 12;
+            this.button2.Text = "Load file...";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(922, 611);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.lblLogger);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.txtLogger);
             this.Controls.Add(this.lblTotalCalls);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.grpConfigs);
+            this.Controls.Add(this.btnActionBrowser);
             this.Controls.Add(this.webBrowser1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.btnAction);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.txtUrl);
             this.Name = "Form1";
             this.Text = "Form1";
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.grpConfigs.ResumeLayout(false);
+            this.grpConfigs.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -225,19 +221,19 @@
 
         private System.Windows.Forms.TextBox txtUrl;
         private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Button btnAction;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.WebBrowser webBrowser1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button btnActionBrowser;
+        private System.Windows.Forms.GroupBox grpConfigs;
         private System.Windows.Forms.CheckBox checkBox3;
         private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox chkConfigSimulateBrowser;
         private System.Windows.Forms.Label lblTotalCalls;
         private System.Windows.Forms.TextBox txtLogger;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lblLogger;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Button button2;
     }
 }
 
