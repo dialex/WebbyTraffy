@@ -1,12 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Net;
 using System.Threading;
 using System.Windows.Forms;
 
 namespace AdClicky
 {
-    public partial class Form1 : Form
+    public partial class Form1 : System.Windows.Forms.Form
     {
         #region Data
 
@@ -18,19 +20,20 @@ namespace AdClicky
         private readonly string WHITESPACE_S = "  ";
         private readonly string WHITESPACE_M = "    ";
 
+        private List<Uri> UrlsToCall;
+
         #endregion
 
         public Form1()
         {
             InitializeComponent();
+            UrlsToCall = new List<Uri>();
         }
         
         private void btnActionBrowser_Click(object sender, EventArgs e)
         {
             try
             {
-                LoadUrls();
-
                 for (int i = 1; i <= 20; i++)
                 {
                     SimulateBrowsing("http://adf.ly/10475475/gmod-textures");
@@ -42,15 +45,38 @@ namespace AdClicky
             }
             catch (Exception error)
             {
-                MessageBox.Show("KABOOM: " + error.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ShowAndLogError("KABOOM!", error.Message);
             }
         }
 
         #region Buttons
 
-        private void button2_Click(object sender, EventArgs e)
+        private void btnFileUrls_Click(object sender, EventArgs e)
         {
+            try
+            {
+                DialogResult result = openFileDialog.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    Stream file = openFileDialog.OpenFile();
+                    LoadUrls(file);
+                    RefreshTotalUrls();
+                }
+            }
+            catch (Exception error)
+            {
+                ShowAndLogError("Could not open the file.", error.Message);
+            }
+        }
 
+        #endregion
+
+        #region UI
+
+        private void RefreshTotalUrls()
+        {
+            lblTotalUrls.Text = UrlsToCall.Count + " loaded";
+            lblTotalUrls.Visible = true;
         }
 
         #endregion
@@ -59,8 +85,7 @@ namespace AdClicky
 
         void SimulateBrowsing(string url)
         {
-            //Browser browserHeader = GetRandomBrowser();
-            Browser browserHeader = Browser.SEAMONKEY;
+            Browser browserHeader = GetRandomBrowser();
             MockCountry();
             OpenUrl(url, browserHeader);
             MockReadingTime(10);
@@ -97,10 +122,51 @@ namespace AdClicky
         #region Helper methods
 
         // URLs
-
-        private void LoadUrls()
+        
+        private void LoadUrls(Stream file)
         {
-            //TODO
+            int numValidUrls = 0;
+            bool hasInvalidUrls = false;
+            string line;
+
+            try
+            {
+                UrlsToCall.Clear();
+                Log("Cleared URL calling list.");
+
+                Log("Loading URLs...");
+                using (StreamReader fileReader = new StreamReader(file))
+                {
+                    while ((line = fileReader.ReadLine()) != null)
+                    {
+                        Uri validatedUrl;
+                        bool isValidUrl =
+                            Uri.TryCreate(line, UriKind.Absolute, out validatedUrl) &&
+                            (validatedUrl.Scheme == Uri.UriSchemeHttp || validatedUrl.Scheme == Uri.UriSchemeHttps);
+
+                        if (isValidUrl)
+                        {
+                            UrlsToCall.Add(validatedUrl);
+                            numValidUrls++;
+                        }
+                        else
+                        {
+                            hasInvalidUrls = true;
+                            Log(WHITESPACE_S + "Not a valid URL: " + line);
+                        }
+                    }
+                }
+
+                if (hasInvalidUrls)
+                    ShowAndLogError("Some URLs were invalid, only " + numValidUrls + " were correctly loaded.");
+                else
+                    Log("Loaded " + numValidUrls + " valid URLs.");
+            }
+            catch (Exception error)
+            {
+                ShowAndLogError("Could not read the contents of the file due to an error.", error.Message);
+            }
+            finally { file.Close(); }
         }
 
         private void OpenUrl(string url, Browser mockBrowser = null)
@@ -143,6 +209,14 @@ namespace AdClicky
         private void Log(string text, bool addNewLine = true)
         {
             txtLogger.AppendText(text + (addNewLine ? Environment.NewLine : string.Empty));
+        }
+
+        private void ShowAndLogError(string userMessage, string detailMessage = "")
+        {
+            if (detailMessage == "") detailMessage = userMessage;
+
+            MessageBox.Show(userMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            Log("ERROR: " + detailMessage);
         }
 
         #endregion

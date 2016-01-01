@@ -41,8 +41,10 @@
             this.lblTotalCalls = new System.Windows.Forms.Label();
             this.txtLogger = new System.Windows.Forms.TextBox();
             this.lblLogger = new System.Windows.Forms.Label();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.button2 = new System.Windows.Forms.Button();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.btnFileUrls = new System.Windows.Forms.Button();
+            this.lblTotalUrls = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.grpConfigs.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -84,11 +86,11 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.webBrowser.IsWebBrowserContextMenuEnabled = false;
-            this.webBrowser.Location = new System.Drawing.Point(478, 200);
+            this.webBrowser.Location = new System.Drawing.Point(478, 30);
             this.webBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser.Name = "webBrowser";
             this.webBrowser.ScriptErrorsSuppressed = true;
-            this.webBrowser.Size = new System.Drawing.Size(432, 399);
+            this.webBrowser.Size = new System.Drawing.Size(432, 415);
             this.webBrowser.TabIndex = 5;
             this.webBrowser.WebBrowserShortcutsEnabled = false;
             // 
@@ -107,7 +109,7 @@
             this.grpConfigs.Controls.Add(this.checkBox3);
             this.grpConfigs.Controls.Add(this.checkBox2);
             this.grpConfigs.Controls.Add(this.chkConfigSimulateBrowser);
-            this.grpConfigs.Location = new System.Drawing.Point(548, 12);
+            this.grpConfigs.Location = new System.Drawing.Point(53, 200);
             this.grpConfigs.Name = "grpConfigs";
             this.grpConfigs.Size = new System.Drawing.Size(310, 182);
             this.grpConfigs.TabIndex = 7;
@@ -161,43 +163,68 @@
             // 
             // txtLogger
             // 
+            this.txtLogger.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtLogger.Font = new System.Drawing.Font("Consolas", 9F);
-            this.txtLogger.Location = new System.Drawing.Point(12, 337);
+            this.txtLogger.Location = new System.Drawing.Point(12, 451);
             this.txtLogger.Multiline = true;
             this.txtLogger.Name = "txtLogger";
             this.txtLogger.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtLogger.Size = new System.Drawing.Size(460, 262);
+            this.txtLogger.Size = new System.Drawing.Size(898, 148);
             this.txtLogger.TabIndex = 9;
             // 
             // lblLogger
             // 
             this.lblLogger.AutoSize = true;
-            this.lblLogger.Location = new System.Drawing.Point(12, 321);
+            this.lblLogger.Location = new System.Drawing.Point(12, 435);
             this.lblLogger.Name = "lblLogger";
-            this.lblLogger.Size = new System.Drawing.Size(171, 13);
+            this.lblLogger.Size = new System.Drawing.Size(168, 13);
             this.lblLogger.TabIndex = 11;
-            this.lblLogger.Text = "What\'s happening under the hood:";
+            this.lblLogger.Text = "What\'s happening under the hood";
             // 
-            // openFileDialog1
+            // openFileDialog
             // 
-            this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog.DereferenceLinks = false;
+            this.openFileDialog.Filter = "\"Text|*.txt|All|*.*\"";
             // 
-            // button2
+            // btnFileUrls
             // 
-            this.button2.Location = new System.Drawing.Point(278, 25);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 12;
-            this.button2.Text = "Load file...";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.btnFileUrls.Location = new System.Drawing.Point(278, 25);
+            this.btnFileUrls.Name = "btnFileUrls";
+            this.btnFileUrls.Size = new System.Drawing.Size(75, 23);
+            this.btnFileUrls.TabIndex = 12;
+            this.btnFileUrls.Text = "Load file...";
+            this.btnFileUrls.UseVisualStyleBackColor = true;
+            this.btnFileUrls.Click += new System.EventHandler(this.btnFileUrls_Click);
+            // 
+            // lblTotalUrls
+            // 
+            this.lblTotalUrls.AutoSize = true;
+            this.lblTotalUrls.Location = new System.Drawing.Point(359, 30);
+            this.lblTotalUrls.Name = "lblTotalUrls";
+            this.lblTotalUrls.Size = new System.Drawing.Size(56, 13);
+            this.lblTotalUrls.TabIndex = 13;
+            this.lblTotalUrls.Tag = "";
+            this.lblTotalUrls.Text = "## loaded";
+            this.lblTotalUrls.Visible = false;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(475, 9);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(71, 13);
+            this.label3.TabIndex = 14;
+            this.label3.Text = "Fake browser";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(922, 611);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.lblTotalUrls);
+            this.Controls.Add(this.btnFileUrls);
             this.Controls.Add(this.lblLogger);
             this.Controls.Add(this.txtLogger);
             this.Controls.Add(this.lblTotalCalls);
@@ -232,8 +259,10 @@
         private System.Windows.Forms.Label lblTotalCalls;
         private System.Windows.Forms.TextBox txtLogger;
         private System.Windows.Forms.Label lblLogger;
-        private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.OpenFileDialog openFileDialog;
+        private System.Windows.Forms.Button btnFileUrls;
+        private System.Windows.Forms.Label lblTotalUrls;
+        private System.Windows.Forms.Label label3;
     }
 }
 
