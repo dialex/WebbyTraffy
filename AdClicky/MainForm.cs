@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace AdClicky
 {
-    public partial class Form1 : System.Windows.Forms.Form
+    public partial class MainForm : System.Windows.Forms.Form
     {
         #region Data
 
@@ -24,7 +24,7 @@ namespace AdClicky
 
         #endregion
 
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
             UrlsToCall = new List<Uri>();

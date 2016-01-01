@@ -1,6 +1,6 @@
 ﻿namespace AdClicky
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -50,33 +50,37 @@
             // 
             // txtUrl
             // 
-            this.txtUrl.Location = new System.Drawing.Point(53, 27);
+            this.txtUrl.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtUrl.Location = new System.Drawing.Point(53, 26);
             this.txtUrl.Name = "txtUrl";
-            this.txtUrl.Size = new System.Drawing.Size(219, 20);
+            this.txtUrl.Size = new System.Drawing.Size(219, 23);
             this.txtUrl.TabIndex = 0;
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(53, 69);
+            this.textBox2.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.textBox2.Location = new System.Drawing.Point(53, 66);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(219, 20);
+            this.textBox2.Size = new System.Drawing.Size(219, 23);
             this.textBox2.TabIndex = 1;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.label1.Location = new System.Drawing.Point(12, 30);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(29, 13);
+            this.label1.Size = new System.Drawing.Size(28, 15);
             this.label1.TabIndex = 3;
             this.label1.Text = "URL";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 72);
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.label2.Location = new System.Drawing.Point(12, 69);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(33, 13);
+            this.label2.Size = new System.Drawing.Size(36, 15);
             this.label2.TabIndex = 4;
             this.label2.Text = "Proxy";
             // 
@@ -86,21 +90,22 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.webBrowser.IsWebBrowserContextMenuEnabled = false;
-            this.webBrowser.Location = new System.Drawing.Point(478, 30);
+            this.webBrowser.Location = new System.Drawing.Point(15, 266);
             this.webBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser.Name = "webBrowser";
             this.webBrowser.ScriptErrorsSuppressed = true;
-            this.webBrowser.Size = new System.Drawing.Size(432, 415);
+            this.webBrowser.Size = new System.Drawing.Size(895, 164);
             this.webBrowser.TabIndex = 5;
             this.webBrowser.WebBrowserShortcutsEnabled = false;
             // 
             // btnActionBrowser
             // 
-            this.btnActionBrowser.Location = new System.Drawing.Point(356, 154);
+            this.btnActionBrowser.Font = new System.Drawing.Font("Segoe UI Light", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnActionBrowser.Location = new System.Drawing.Point(718, 200);
             this.btnActionBrowser.Name = "btnActionBrowser";
-            this.btnActionBrowser.Size = new System.Drawing.Size(75, 23);
+            this.btnActionBrowser.Size = new System.Drawing.Size(192, 42);
             this.btnActionBrowser.TabIndex = 6;
-            this.btnActionBrowser.Text = "Use browser";
+            this.btnActionBrowser.Text = "DO IT!";
             this.btnActionBrowser.UseVisualStyleBackColor = true;
             this.btnActionBrowser.Click += new System.EventHandler(this.btnActionBrowser_Click);
             // 
@@ -109,9 +114,10 @@
             this.grpConfigs.Controls.Add(this.checkBox3);
             this.grpConfigs.Controls.Add(this.checkBox2);
             this.grpConfigs.Controls.Add(this.chkConfigSimulateBrowser);
-            this.grpConfigs.Location = new System.Drawing.Point(53, 200);
+            this.grpConfigs.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.grpConfigs.Location = new System.Drawing.Point(718, 12);
             this.grpConfigs.Name = "grpConfigs";
-            this.grpConfigs.Size = new System.Drawing.Size(310, 182);
+            this.grpConfigs.Size = new System.Drawing.Size(192, 182);
             this.grpConfigs.TabIndex = 7;
             this.grpConfigs.TabStop = false;
             this.grpConfigs.Text = "Configurations";
@@ -120,9 +126,10 @@
             // 
             this.checkBox3.AutoSize = true;
             this.checkBox3.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.checkBox3.Location = new System.Drawing.Point(6, 77);
+            this.checkBox3.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.checkBox3.Location = new System.Drawing.Point(6, 84);
             this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(80, 17);
+            this.checkBox3.Size = new System.Drawing.Size(82, 19);
             this.checkBox3.TabIndex = 2;
             this.checkBox3.Text = "checkBox3";
             this.checkBox3.UseVisualStyleBackColor = true;
@@ -131,9 +138,10 @@
             // 
             this.checkBox2.AutoSize = true;
             this.checkBox2.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.checkBox2.Location = new System.Drawing.Point(6, 48);
+            this.checkBox2.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.checkBox2.Location = new System.Drawing.Point(6, 55);
             this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(80, 17);
+            this.checkBox2.Size = new System.Drawing.Size(82, 19);
             this.checkBox2.TabIndex = 1;
             this.checkBox2.Text = "checkBox2";
             this.checkBox2.UseVisualStyleBackColor = true;
@@ -144,9 +152,10 @@
             this.chkConfigSimulateBrowser.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.chkConfigSimulateBrowser.Checked = true;
             this.chkConfigSimulateBrowser.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkConfigSimulateBrowser.Location = new System.Drawing.Point(6, 19);
+            this.chkConfigSimulateBrowser.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.chkConfigSimulateBrowser.Location = new System.Drawing.Point(6, 26);
             this.chkConfigSimulateBrowser.Name = "chkConfigSimulateBrowser";
-            this.chkConfigSimulateBrowser.Size = new System.Drawing.Size(112, 17);
+            this.chkConfigSimulateBrowser.Size = new System.Drawing.Size(122, 19);
             this.chkConfigSimulateBrowser.TabIndex = 0;
             this.chkConfigSimulateBrowser.Text = "Simulate Browsers";
             this.chkConfigSimulateBrowser.UseVisualStyleBackColor = true;
@@ -154,9 +163,10 @@
             // lblTotalCalls
             // 
             this.lblTotalCalls.AutoSize = true;
-            this.lblTotalCalls.Location = new System.Drawing.Point(437, 159);
+            this.lblTotalCalls.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblTotalCalls.Location = new System.Drawing.Point(798, 245);
             this.lblTotalCalls.Name = "lblTotalCalls";
-            this.lblTotalCalls.Size = new System.Drawing.Size(31, 13);
+            this.lblTotalCalls.Size = new System.Drawing.Size(33, 15);
             this.lblTotalCalls.TabIndex = 8;
             this.lblTotalCalls.Tag = "Total: ";
             this.lblTotalCalls.Text = "Total";
@@ -176,9 +186,10 @@
             // lblLogger
             // 
             this.lblLogger.AutoSize = true;
-            this.lblLogger.Location = new System.Drawing.Point(12, 435);
+            this.lblLogger.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblLogger.Location = new System.Drawing.Point(12, 433);
             this.lblLogger.Name = "lblLogger";
-            this.lblLogger.Size = new System.Drawing.Size(168, 13);
+            this.lblLogger.Size = new System.Drawing.Size(188, 15);
             this.lblLogger.TabIndex = 11;
             this.lblLogger.Text = "What\'s happening under the hood";
             // 
@@ -189,7 +200,8 @@
             // 
             // btnFileUrls
             // 
-            this.btnFileUrls.Location = new System.Drawing.Point(278, 25);
+            this.btnFileUrls.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnFileUrls.Location = new System.Drawing.Point(278, 26);
             this.btnFileUrls.Name = "btnFileUrls";
             this.btnFileUrls.Size = new System.Drawing.Size(75, 23);
             this.btnFileUrls.TabIndex = 12;
@@ -200,9 +212,10 @@
             // lblTotalUrls
             // 
             this.lblTotalUrls.AutoSize = true;
+            this.lblTotalUrls.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.lblTotalUrls.Location = new System.Drawing.Point(359, 30);
             this.lblTotalUrls.Name = "lblTotalUrls";
-            this.lblTotalUrls.Size = new System.Drawing.Size(56, 13);
+            this.lblTotalUrls.Size = new System.Drawing.Size(60, 15);
             this.lblTotalUrls.TabIndex = 13;
             this.lblTotalUrls.Tag = "";
             this.lblTotalUrls.Text = "## loaded";
@@ -211,13 +224,14 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(475, 9);
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.label3.Location = new System.Drawing.Point(12, 248);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(71, 13);
+            this.label3.Size = new System.Drawing.Size(76, 15);
             this.label3.TabIndex = 14;
             this.label3.Text = "Fake browser";
             // 
-            // Form1
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -235,8 +249,8 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.txtUrl);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.grpConfigs.ResumeLayout(false);
             this.grpConfigs.PerformLayout();
             this.ResumeLayout(false);
