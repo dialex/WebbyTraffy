@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Net;
 using System.Threading;
 using System.Windows.Forms;
@@ -14,38 +15,27 @@ namespace AdClicky
         #endregion
         #region Configs
 
+        private readonly string WHITESPACE_S = "  ";
+        private readonly string WHITESPACE_M = "    ";
+
         #endregion
 
         public Form1()
         {
             InitializeComponent();
         }
-
-        private void btnAction_Click(object sender, EventArgs e)
-        {
-            string htmlPage;
-
-            for (int i = 1; i <= 10; i++)
-            {
-                using (WebClient client = new WebClient())
-                {
-                    htmlPage = FetchUrl("http://adf.ly/10475475/gmod-maps");
-                    Thread.Sleep(1000 * 10);
-                    htmlPage = FetchUrl("http://www.diogonunes.com/blog/install-config-gmod-guide/");
-                }
-                lblTotalCalls.Text = lblTotalCalls.Tag.ToString() + i.ToString();
-            }
-        }
-
+        
         private void btnActionBrowser_Click(object sender, EventArgs e)
         {
             try
             {
+                LoadUrls();
+
                 for (int i = 1; i <= 20; i++)
                 {
                     SimulateBrowsing("http://adf.ly/10475475/gmod-textures");
-                    Thread.Sleep(1000 * 2);
-                    SimulateBrowsing("http://www.diogonunes.com/blog/minecraft-a-game-as-a-metaphor-of-life/");
+                    Thread.Sleep(1000 * 15);
+                    SimulateBrowsing("http://www.diogonunes.com/blog/too-weird-to-live-too-unique-to-die/");
 
                     lblTotalCalls.Text = lblTotalCalls.Tag.ToString() + i.ToString();
                 }
@@ -69,8 +59,8 @@ namespace AdClicky
 
         void SimulateBrowsing(string url)
         {
-            Browser browserHeader = GetRandomBrowser();
-            //Browser browserHeader = Browser.OPERA;
+            //Browser browserHeader = GetRandomBrowser();
+            Browser browserHeader = Browser.SEAMONKEY;
             MockCountry();
             OpenUrl(url, browserHeader);
             MockReadingTime(10);
@@ -106,25 +96,35 @@ namespace AdClicky
 
         #region Helper methods
 
+        // URLs
+
+        private void LoadUrls()
+        {
+            //TODO
+        }
+
         private void OpenUrl(string url, Browser mockBrowser = null)
         {
-            Log("Open on browser: " + url);
+            Log("Browsing: " + url);
             if (mockBrowser == null)
             {
-                webBrowser1.Navigate(url);
+                webBrowser.Navigate(url);
             }
             else
             {
-                Log("\tUserAgent: " + mockBrowser.Name);
-                webBrowser1.Navigate(url, "_self", null, mockBrowser.UserAgent + Environment.NewLine);
+                Log(WHITESPACE_S + "UserAgent: " + mockBrowser.Name);
+                webBrowser.Navigate(url, "_self", null, mockBrowser.UserAgent + Environment.NewLine);
             }
 
             Log("Downloading...", false);
-            while (webBrowser1.ReadyState != WebBrowserReadyState.Complete)
+
+            Stopwatch watch = Stopwatch.StartNew();
+            while (webBrowser.ReadyState != WebBrowserReadyState.Complete)
             {
                 Application.DoEvents();
             }
-            Log(" done", true);
+            watch.Stop();
+            Log(string.Format(" done{0}({1}s)", WHITESPACE_M, Math.Truncate(watch.Elapsed.TotalSeconds)), true);
         }
 
         private string FetchUrl(string url, string hearderUserAgent = "")
@@ -137,6 +137,8 @@ namespace AdClicky
 
             return web.DownloadString(url);
         }
+
+        // Logging
 
         private void Log(string text, bool addNewLine = true)
         {

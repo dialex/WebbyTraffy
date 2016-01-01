@@ -32,7 +32,7 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
+            this.webBrowser = new System.Windows.Forms.WebBrowser();
             this.btnActionBrowser = new System.Windows.Forms.Button();
             this.grpConfigs = new System.Windows.Forms.GroupBox();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
@@ -78,19 +78,19 @@
             this.label2.TabIndex = 4;
             this.label2.Text = "Proxy";
             // 
-            // webBrowser1
+            // webBrowser
             // 
-            this.webBrowser1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.webBrowser.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.webBrowser1.IsWebBrowserContextMenuEnabled = false;
-            this.webBrowser1.Location = new System.Drawing.Point(478, 200);
-            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
-            this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.ScriptErrorsSuppressed = true;
-            this.webBrowser1.Size = new System.Drawing.Size(432, 399);
-            this.webBrowser1.TabIndex = 5;
-            this.webBrowser1.WebBrowserShortcutsEnabled = false;
+            this.webBrowser.IsWebBrowserContextMenuEnabled = false;
+            this.webBrowser.Location = new System.Drawing.Point(478, 200);
+            this.webBrowser.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webBrowser.Name = "webBrowser";
+            this.webBrowser.ScriptErrorsSuppressed = true;
+            this.webBrowser.Size = new System.Drawing.Size(432, 399);
+            this.webBrowser.TabIndex = 5;
+            this.webBrowser.WebBrowserShortcutsEnabled = false;
             // 
             // btnActionBrowser
             // 
@@ -203,7 +203,7 @@
             this.Controls.Add(this.lblTotalCalls);
             this.Controls.Add(this.grpConfigs);
             this.Controls.Add(this.btnActionBrowser);
-            this.Controls.Add(this.webBrowser1);
+            this.Controls.Add(this.webBrowser);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox2);
@@ -223,7 +223,7 @@
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.WebBrowser webBrowser1;
+        private System.Windows.Forms.WebBrowser webBrowser;
         private System.Windows.Forms.Button btnActionBrowser;
         private System.Windows.Forms.GroupBox grpConfigs;
         private System.Windows.Forms.CheckBox checkBox3;
