@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
+using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -19,9 +20,10 @@ namespace AdClicky
 
         private readonly string WHITESPACE_S = "  ";
         private readonly string WHITESPACE_M = "    ";
+        private readonly string SEPARATOR_DASHES = "------------------------------------------------------";
 
         private List<Uri> UrlsToCall;
-
+        
         #endregion
 
         public MainForm()
@@ -45,7 +47,7 @@ namespace AdClicky
             }
             catch (Exception error)
             {
-                ShowAndLogError("KABOOM!", error.Message);
+                ShowAndLogErrorMsg("KABOOM!", error.Message);
             }
         }
 
@@ -65,8 +67,18 @@ namespace AdClicky
             }
             catch (Exception error)
             {
-                ShowAndLogError("Could not open the file.", error.Message);
+                ShowAndLogErrorMsg("Could not open the file.", error.Message);
             }
+        }
+
+        private void lblTotalUrls_Click(object sender, EventArgs e)
+        {
+            DisplayUrlsToCall();
+        }
+
+        private void lblUrlsToCall_Click(object sender, EventArgs e)
+        {
+            DisplayUrlsToCall();
         }
 
         #endregion
@@ -75,8 +87,25 @@ namespace AdClicky
 
         private void RefreshTotalUrls()
         {
-            lblTotalUrls.Text = UrlsToCall.Count + " loaded";
-            lblTotalUrls.Visible = true;
+            lblUrlsToCall.Text = lblUrlsToCall.Tag.ToString() + UrlsToCall.Count;
+        }
+
+        private void DisplayUrlsToCall()
+        {
+            StringBuilder str = new StringBuilder();
+            foreach (Uri url in UrlsToCall)
+            {
+                str.AppendLine(url.ToString());
+            }
+
+            if (str.Length > 0)
+            {
+                ShowInfoMsg("Check the output console below.");
+                Log(SEPARATOR_DASHES);
+                Log(str.ToString(), false);
+                Log(SEPARATOR_DASHES);
+            }
+            else ShowInfoMsg("You should load a file containing the URLs to be called by this app.");
         }
 
         #endregion
@@ -158,13 +187,13 @@ namespace AdClicky
                 }
 
                 if (hasInvalidUrls)
-                    ShowAndLogError("Some URLs were invalid, only " + numValidUrls + " were correctly loaded.");
+                    ShowAndLogErrorMsg("Some URLs were invalid, only " + numValidUrls + " were correctly loaded.");
                 else
                     Log("Loaded " + numValidUrls + " valid URLs.");
             }
             catch (Exception error)
             {
-                ShowAndLogError("Could not read the contents of the file due to an error.", error.Message);
+                ShowAndLogErrorMsg("Could not read the contents of the file due to an error.", error.Message);
             }
             finally { file.Close(); }
         }
@@ -211,12 +240,17 @@ namespace AdClicky
             txtLogger.AppendText(text + (addNewLine ? Environment.NewLine : string.Empty));
         }
 
-        private void ShowAndLogError(string userMessage, string detailMessage = "")
+        private void ShowAndLogErrorMsg(string userMessage, string detailMessage = "")
         {
             if (detailMessage == "") detailMessage = userMessage;
 
             MessageBox.Show(userMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             Log("ERROR: " + detailMessage);
+        }
+
+        private static void ShowInfoMsg(string message)
+        {
+            MessageBox.Show(message, "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         #endregion

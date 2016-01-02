@@ -28,9 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.txtUrl = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblUrlsToCall = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.webBrowser = new System.Windows.Forms.WebBrowser();
             this.btnActionBrowser = new System.Windows.Forms.Button();
@@ -43,18 +42,9 @@
             this.lblLogger = new System.Windows.Forms.Label();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.btnFileUrls = new System.Windows.Forms.Button();
-            this.lblTotalUrls = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.grpConfigs.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // txtUrl
-            // 
-            this.txtUrl.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtUrl.Location = new System.Drawing.Point(53, 26);
-            this.txtUrl.Name = "txtUrl";
-            this.txtUrl.Size = new System.Drawing.Size(219, 23);
-            this.txtUrl.TabIndex = 0;
             // 
             // textBox2
             // 
@@ -64,15 +54,18 @@
             this.textBox2.Size = new System.Drawing.Size(219, 23);
             this.textBox2.TabIndex = 1;
             // 
-            // label1
+            // lblUrlsToCall
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.label1.Location = new System.Drawing.Point(12, 30);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(28, 15);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "URL";
+            this.lblUrlsToCall.AutoSize = true;
+            this.lblUrlsToCall.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblUrlsToCall.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblUrlsToCall.Location = new System.Drawing.Point(12, 12);
+            this.lblUrlsToCall.Name = "lblUrlsToCall";
+            this.lblUrlsToCall.Size = new System.Drawing.Size(109, 15);
+            this.lblUrlsToCall.TabIndex = 3;
+            this.lblUrlsToCall.Tag = "URLs to call: ";
+            this.lblUrlsToCall.Text = "URLs to call: (none)";
+            this.lblUrlsToCall.Click += new System.EventHandler(this.lblUrlsToCall_Click);
             // 
             // label2
             // 
@@ -141,9 +134,9 @@
             this.checkBox2.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.checkBox2.Location = new System.Drawing.Point(6, 55);
             this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(82, 19);
+            this.checkBox2.Size = new System.Drawing.Size(72, 19);
             this.checkBox2.TabIndex = 1;
-            this.checkBox2.Text = "checkBox2";
+            this.checkBox2.Text = "Simulate";
             this.checkBox2.UseVisualStyleBackColor = true;
             // 
             // chkConfigSimulateBrowser
@@ -201,25 +194,13 @@
             // btnFileUrls
             // 
             this.btnFileUrls.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.btnFileUrls.Location = new System.Drawing.Point(278, 26);
+            this.btnFileUrls.Location = new System.Drawing.Point(173, 8);
             this.btnFileUrls.Name = "btnFileUrls";
             this.btnFileUrls.Size = new System.Drawing.Size(75, 23);
             this.btnFileUrls.TabIndex = 12;
             this.btnFileUrls.Text = "Load file...";
             this.btnFileUrls.UseVisualStyleBackColor = true;
             this.btnFileUrls.Click += new System.EventHandler(this.btnFileUrls_Click);
-            // 
-            // lblTotalUrls
-            // 
-            this.lblTotalUrls.AutoSize = true;
-            this.lblTotalUrls.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblTotalUrls.Location = new System.Drawing.Point(359, 30);
-            this.lblTotalUrls.Name = "lblTotalUrls";
-            this.lblTotalUrls.Size = new System.Drawing.Size(60, 15);
-            this.lblTotalUrls.TabIndex = 13;
-            this.lblTotalUrls.Tag = "";
-            this.lblTotalUrls.Text = "## loaded";
-            this.lblTotalUrls.Visible = false;
             // 
             // label3
             // 
@@ -237,7 +218,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(922, 611);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.lblTotalUrls);
             this.Controls.Add(this.btnFileUrls);
             this.Controls.Add(this.lblLogger);
             this.Controls.Add(this.txtLogger);
@@ -246,9 +226,8 @@
             this.Controls.Add(this.btnActionBrowser);
             this.Controls.Add(this.webBrowser);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblUrlsToCall);
             this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.txtUrl);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.grpConfigs.ResumeLayout(false);
@@ -259,10 +238,8 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox txtUrl;
         private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblUrlsToCall;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.WebBrowser webBrowser;
         private System.Windows.Forms.Button btnActionBrowser;
@@ -275,7 +252,6 @@
         private System.Windows.Forms.Label lblLogger;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.Button btnFileUrls;
-        private System.Windows.Forms.Label lblTotalUrls;
         private System.Windows.Forms.Label label3;
     }
 }
