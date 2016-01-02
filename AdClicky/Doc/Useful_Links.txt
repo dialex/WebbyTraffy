@@ -27,12 +27,5 @@ Configs:
 
 Consola que vai mostrando o resultado das chamadas (não pode bloquear, usar thread para atualizar)
 
-Ficheiros com url por linha, cada um deve ser chamado:
-Urls.txt
-
 Ficheiro com lista de proxies a usar: COUNTRY_CODE|IP|PORT
 Proxies.txt
-
-
-
-POCKET: http://webaim.org/blog/user-agent-string-history/

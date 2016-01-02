@@ -86,6 +86,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Doc\Useful_Links.txt" />
+    <Content Include="Proxies.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="Resources\1451755992_open-file.png" />
+    <Content Include="Urls.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="Resources\ajax-loader.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

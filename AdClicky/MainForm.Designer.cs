@@ -28,54 +28,37 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox2 = new System.Windows.Forms.TextBox();
             this.lblUrlsToCall = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.webBrowser = new System.Windows.Forms.WebBrowser();
             this.btnActionBrowser = new System.Windows.Forms.Button();
             this.grpConfigs = new System.Windows.Forms.GroupBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.btnFileProxies = new System.Windows.Forms.Button();
+            this.btnFileUrls = new System.Windows.Forms.Button();
+            this.chkConfigSimulateOpSystem = new System.Windows.Forms.CheckBox();
+            this.chkConfigSimulateCountries = new System.Windows.Forms.CheckBox();
             this.chkConfigSimulateBrowser = new System.Windows.Forms.CheckBox();
             this.lblTotalCalls = new System.Windows.Forms.Label();
             this.txtLogger = new System.Windows.Forms.TextBox();
             this.lblLogger = new System.Windows.Forms.Label();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.btnFileUrls = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
+            this.picLoading = new System.Windows.Forms.PictureBox();
             this.grpConfigs.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picLoading)).BeginInit();
             this.SuspendLayout();
-            // 
-            // textBox2
-            // 
-            this.textBox2.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.textBox2.Location = new System.Drawing.Point(53, 66);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(219, 23);
-            this.textBox2.TabIndex = 1;
             // 
             // lblUrlsToCall
             // 
             this.lblUrlsToCall.AutoSize = true;
             this.lblUrlsToCall.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblUrlsToCall.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblUrlsToCall.Location = new System.Drawing.Point(12, 12);
+            this.lblUrlsToCall.Location = new System.Drawing.Point(9, 29);
             this.lblUrlsToCall.Name = "lblUrlsToCall";
             this.lblUrlsToCall.Size = new System.Drawing.Size(109, 15);
             this.lblUrlsToCall.TabIndex = 3;
             this.lblUrlsToCall.Tag = "URLs to call: ";
             this.lblUrlsToCall.Text = "URLs to call: (none)";
             this.lblUrlsToCall.Click += new System.EventHandler(this.lblUrlsToCall_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.label2.Location = new System.Drawing.Point(12, 69);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(36, 15);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Proxy";
             // 
             // webBrowser
             // 
@@ -104,40 +87,75 @@
             // 
             // grpConfigs
             // 
-            this.grpConfigs.Controls.Add(this.checkBox3);
-            this.grpConfigs.Controls.Add(this.checkBox2);
+            this.grpConfigs.Controls.Add(this.btnFileProxies);
+            this.grpConfigs.Controls.Add(this.btnFileUrls);
+            this.grpConfigs.Controls.Add(this.chkConfigSimulateOpSystem);
+            this.grpConfigs.Controls.Add(this.chkConfigSimulateCountries);
             this.grpConfigs.Controls.Add(this.chkConfigSimulateBrowser);
+            this.grpConfigs.Controls.Add(this.lblUrlsToCall);
             this.grpConfigs.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.grpConfigs.Location = new System.Drawing.Point(718, 12);
+            this.grpConfigs.Location = new System.Drawing.Point(12, 12);
             this.grpConfigs.Name = "grpConfigs";
-            this.grpConfigs.Size = new System.Drawing.Size(192, 182);
+            this.grpConfigs.Size = new System.Drawing.Size(233, 182);
             this.grpConfigs.TabIndex = 7;
             this.grpConfigs.TabStop = false;
             this.grpConfigs.Text = "Configurations";
             // 
-            // checkBox3
+            // btnFileProxies
             // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.checkBox3.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.checkBox3.Location = new System.Drawing.Point(6, 84);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(82, 19);
-            this.checkBox3.TabIndex = 2;
-            this.checkBox3.Text = "checkBox3";
-            this.checkBox3.UseVisualStyleBackColor = true;
+            this.btnFileProxies.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnFileProxies.Image = global::AdClicky.Properties.Resources.OpenFile;
+            this.btnFileProxies.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnFileProxies.Location = new System.Drawing.Point(141, 136);
+            this.btnFileProxies.Name = "btnFileProxies";
+            this.btnFileProxies.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            this.btnFileProxies.Size = new System.Drawing.Size(80, 23);
+            this.btnFileProxies.TabIndex = 15;
+            this.btnFileProxies.Text = "Load...";
+            this.btnFileProxies.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnFileProxies.UseVisualStyleBackColor = true;
             // 
-            // checkBox2
+            // btnFileUrls
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.checkBox2.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.checkBox2.Location = new System.Drawing.Point(6, 55);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(72, 19);
-            this.checkBox2.TabIndex = 1;
-            this.checkBox2.Text = "Simulate";
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.btnFileUrls.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnFileUrls.Image = global::AdClicky.Properties.Resources.OpenFile;
+            this.btnFileUrls.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnFileUrls.Location = new System.Drawing.Point(141, 25);
+            this.btnFileUrls.Name = "btnFileUrls";
+            this.btnFileUrls.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            this.btnFileUrls.Size = new System.Drawing.Size(80, 23);
+            this.btnFileUrls.TabIndex = 12;
+            this.btnFileUrls.Text = "Load...";
+            this.btnFileUrls.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnFileUrls.UseVisualStyleBackColor = true;
+            this.btnFileUrls.Click += new System.EventHandler(this.btnFileUrls_Click);
+            // 
+            // chkConfigSimulateOpSystem
+            // 
+            this.chkConfigSimulateOpSystem.AutoSize = true;
+            this.chkConfigSimulateOpSystem.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chkConfigSimulateOpSystem.Enabled = false;
+            this.chkConfigSimulateOpSystem.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.chkConfigSimulateOpSystem.Location = new System.Drawing.Point(9, 63);
+            this.chkConfigSimulateOpSystem.Name = "chkConfigSimulateOpSystem";
+            this.chkConfigSimulateOpSystem.Size = new System.Drawing.Size(90, 19);
+            this.chkConfigSimulateOpSystem.TabIndex = 2;
+            this.chkConfigSimulateOpSystem.Text = "Simulate OS";
+            this.chkConfigSimulateOpSystem.UseVisualStyleBackColor = true;
+            // 
+            // chkConfigSimulateCountries
+            // 
+            this.chkConfigSimulateCountries.AutoSize = true;
+            this.chkConfigSimulateCountries.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chkConfigSimulateCountries.Checked = true;
+            this.chkConfigSimulateCountries.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkConfigSimulateCountries.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.chkConfigSimulateCountries.Location = new System.Drawing.Point(9, 139);
+            this.chkConfigSimulateCountries.Name = "chkConfigSimulateCountries";
+            this.chkConfigSimulateCountries.Size = new System.Drawing.Size(126, 19);
+            this.chkConfigSimulateCountries.TabIndex = 1;
+            this.chkConfigSimulateCountries.Text = "Simulate Countries";
+            this.chkConfigSimulateCountries.UseVisualStyleBackColor = true;
             // 
             // chkConfigSimulateBrowser
             // 
@@ -146,7 +164,7 @@
             this.chkConfigSimulateBrowser.Checked = true;
             this.chkConfigSimulateBrowser.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkConfigSimulateBrowser.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.chkConfigSimulateBrowser.Location = new System.Drawing.Point(6, 26);
+            this.chkConfigSimulateBrowser.Location = new System.Drawing.Point(9, 101);
             this.chkConfigSimulateBrowser.Name = "chkConfigSimulateBrowser";
             this.chkConfigSimulateBrowser.Size = new System.Drawing.Size(122, 19);
             this.chkConfigSimulateBrowser.TabIndex = 0;
@@ -182,25 +200,14 @@
             this.lblLogger.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.lblLogger.Location = new System.Drawing.Point(12, 433);
             this.lblLogger.Name = "lblLogger";
-            this.lblLogger.Size = new System.Drawing.Size(188, 15);
+            this.lblLogger.Size = new System.Drawing.Size(267, 15);
             this.lblLogger.TabIndex = 11;
-            this.lblLogger.Text = "What\'s happening under the hood";
+            this.lblLogger.Text = "Console          (what\'s happening under the hood)";
             // 
             // openFileDialog
             // 
             this.openFileDialog.DereferenceLinks = false;
             this.openFileDialog.Filter = "\"Text|*.txt|All|*.*\"";
-            // 
-            // btnFileUrls
-            // 
-            this.btnFileUrls.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.btnFileUrls.Location = new System.Drawing.Point(173, 8);
-            this.btnFileUrls.Name = "btnFileUrls";
-            this.btnFileUrls.Size = new System.Drawing.Size(75, 23);
-            this.btnFileUrls.TabIndex = 12;
-            this.btnFileUrls.Text = "Load file...";
-            this.btnFileUrls.UseVisualStyleBackColor = true;
-            this.btnFileUrls.Click += new System.EventHandler(this.btnFileUrls_Click);
             // 
             // label3
             // 
@@ -212,40 +219,47 @@
             this.label3.TabIndex = 14;
             this.label3.Text = "Fake browser";
             // 
+            // picLoading
+            // 
+            this.picLoading.Image = global::AdClicky.Properties.Resources.LoadingAnimation;
+            this.picLoading.Location = new System.Drawing.Point(684, 200);
+            this.picLoading.Name = "picLoading";
+            this.picLoading.Size = new System.Drawing.Size(28, 42);
+            this.picLoading.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.picLoading.TabIndex = 15;
+            this.picLoading.TabStop = false;
+            this.picLoading.Visible = false;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(922, 611);
+            this.Controls.Add(this.picLoading);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.btnFileUrls);
             this.Controls.Add(this.lblLogger);
             this.Controls.Add(this.txtLogger);
             this.Controls.Add(this.lblTotalCalls);
             this.Controls.Add(this.grpConfigs);
             this.Controls.Add(this.btnActionBrowser);
             this.Controls.Add(this.webBrowser);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.lblUrlsToCall);
-            this.Controls.Add(this.textBox2);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.grpConfigs.ResumeLayout(false);
             this.grpConfigs.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picLoading)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label lblUrlsToCall;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.WebBrowser webBrowser;
         private System.Windows.Forms.Button btnActionBrowser;
         private System.Windows.Forms.GroupBox grpConfigs;
-        private System.Windows.Forms.CheckBox checkBox3;
-        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.CheckBox chkConfigSimulateOpSystem;
+        private System.Windows.Forms.CheckBox chkConfigSimulateCountries;
         private System.Windows.Forms.CheckBox chkConfigSimulateBrowser;
         private System.Windows.Forms.Label lblTotalCalls;
         private System.Windows.Forms.TextBox txtLogger;
@@ -253,6 +267,8 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.Button btnFileUrls;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btnFileProxies;
+        private System.Windows.Forms.PictureBox picLoading;
     }
 }
 

@@ -29,11 +29,34 @@ namespace AdClicky
         public MainForm()
         {
             InitializeComponent();
-            UrlsToCall = new List<Uri>();
+            Init();
         }
-        
+
+        private void Init()
+        {
+            Log("Initializing...");
+            UrlsToCall = new List<Uri>();
+
+            // Import default configs
+            try
+            {
+                Log(WHITESPACE_S + "Attempting to load \"Urls.txt\" file.");
+                if (File.Exists("Urls.txt"))
+                    LoadUrls(File.Open("Urls.txt", FileMode.Open));
+
+                //Log("Attempting to load \"Proxies.txt\" file.");
+                //if (File.Exists("Urls.txt"))
+                //    LoadUrls(File.Open("Urls.txt", FileMode.Open));
+            }
+            catch (Exception error)
+            {
+                ShowAndLogErrorMsg("Something went wrong while reading the default configurations.", error.Message);
+            }
+        }
+
         private void btnActionBrowser_Click(object sender, EventArgs e)
         {
+            picLoading.Visible = true;
             try
             {
                 for (int i = 1; i <= 20; i++)
@@ -49,6 +72,7 @@ namespace AdClicky
             {
                 ShowAndLogErrorMsg("KABOOM!", error.Message);
             }
+            finally { picLoading.Visible = false; }
         }
 
         #region Buttons
@@ -62,7 +86,6 @@ namespace AdClicky
                 {
                     Stream file = openFileDialog.OpenFile();
                     LoadUrls(file);
-                    RefreshTotalUrls();
                 }
             }
             catch (Exception error)
@@ -195,7 +218,11 @@ namespace AdClicky
             {
                 ShowAndLogErrorMsg("Could not read the contents of the file due to an error.", error.Message);
             }
-            finally { file.Close(); }
+            finally
+            {
+                file.Close();
+                RefreshTotalUrls();
+            }
         }
 
         private void OpenUrl(string url, Browser mockBrowser = null)
