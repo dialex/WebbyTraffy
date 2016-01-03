@@ -69,14 +69,21 @@ namespace WebbyTraffy
             try
             {
                 picLoading.Visible = true;
+                Log(LINE_STRONG);
 
-                foreach (Uri url in UrlsToVisit)
+                while (TotalLoops < spinNumberLoops.Value)
                 {
-                    SimulateBrowsing(url.ToString());
-                    RefreshTotalVisits(1);
-                    WaitBeforeNext();
+                    int urlIndex = 0;
+                    foreach (Uri url in UrlsToVisit)
+                    {
+                        Log(string.Format("{0} Action: {1} - Url {2} is being visited by the {3} time.",
+                            new string(LINE_STRONG_CHAR, 5), TotalVisits + 1, ++urlIndex, DisplayOrdinal(TotalLoops + 1)));
+                        SimulateBrowsing(url.ToString());
+                        RefreshTotalVisits(1);
+                        WaitBeforeNext();
+                    }
+                    RefreshTotalLoops(1);
                 }
-                RefreshTotalLoops(1);
             }
             catch (Exception error)
             {
@@ -85,6 +92,7 @@ namespace WebbyTraffy
             finally
             {
                 picLoading.Visible = false;
+                Log(LINE_STRONG);
             }
         }
 
@@ -160,6 +168,32 @@ namespace WebbyTraffy
             else ShowInfoMsg("You should load a file containing the URLs to be called by this app.");
         }
 
+        public string DisplayOrdinal(int number)
+        {
+            if (number <= 0) return number.ToString();
+
+            switch (number % 100)
+            {
+                case 11:
+                case 12:
+                case 13:
+                    return number + "th";
+            }
+
+            switch (number % 10)
+            {
+                case 1:
+                    return number + "st";
+                case 2:
+                    return number + "nd";
+                case 3:
+                    return number + "rd";
+                default:
+                    return number + "th";
+            }
+
+        }
+
         #endregion
 
         #region Mockup methods
@@ -179,7 +213,19 @@ namespace WebbyTraffy
 
         private void SimulateReading()
         {
-            //TODO
+            Log("Reading...", false);
+            Stopwatch watch = Stopwatch.StartNew();
+
+            Thread.Sleep(5000);
+            //while ()
+            //{
+            //    Application.DoEvents();
+            //}
+            //Log(WHITESPACE_S + "hum", false);
+            //Log(WHITESPACE_S + "...", false);
+
+            watch.Stop();
+            Log(string.Format(" done{0}({1}s)", WHITESPACE_M, Math.Truncate(watch.Elapsed.TotalSeconds)), true);
         }
 
         private Browser GetRandomBrowser()
@@ -267,7 +313,6 @@ namespace WebbyTraffy
             }
 
             Log("Downloading...", false);
-
             Stopwatch watch = Stopwatch.StartNew();
             while (webBrowser.ReadyState != WebBrowserReadyState.Complete)
             {

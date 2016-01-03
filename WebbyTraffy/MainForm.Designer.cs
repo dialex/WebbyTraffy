@@ -42,10 +42,10 @@
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.picLoading = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.spinRepeatConditionValue = new System.Windows.Forms.NumericUpDown();
-            this.lblRepeatConditionValue = new System.Windows.Forms.Label();
-            this.lblRepeatConditionType = new System.Windows.Forms.Label();
+            this.spinNumberLoops = new System.Windows.Forms.NumericUpDown();
+            this.spinLoopDuration = new System.Windows.Forms.NumericUpDown();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.lblConfigAvgReadTime = new System.Windows.Forms.Label();
             this.spinAvgReadTime = new System.Windows.Forms.NumericUpDown();
             this.lblTotalLoops = new System.Windows.Forms.Label();
@@ -54,8 +54,8 @@
             this.grpConfigs.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLoading)).BeginInit();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.spinRepeatConditionValue)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spinNumberLoops)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spinLoopDuration)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinAvgReadTime)).BeginInit();
             this.grpConsole.SuspendLayout();
             this.grpBrowser.SuspendLayout();
@@ -183,7 +183,7 @@
             // 
             this.lblTotalVisits.AutoSize = true;
             this.lblTotalVisits.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblTotalVisits.Location = new System.Drawing.Point(12, 409);
+            this.lblTotalVisits.Location = new System.Drawing.Point(13, 430);
             this.lblTotalVisits.Name = "lblTotalVisits";
             this.lblTotalVisits.Size = new System.Drawing.Size(74, 15);
             this.lblTotalVisits.TabIndex = 8;
@@ -221,10 +221,10 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.numericUpDown1);
-            this.groupBox1.Controls.Add(this.spinRepeatConditionValue);
-            this.groupBox1.Controls.Add(this.lblRepeatConditionValue);
-            this.groupBox1.Controls.Add(this.lblRepeatConditionType);
+            this.groupBox1.Controls.Add(this.spinNumberLoops);
+            this.groupBox1.Controls.Add(this.spinLoopDuration);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.lblConfigAvgReadTime);
             this.groupBox1.Controls.Add(this.spinAvgReadTime);
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
@@ -235,75 +235,72 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Traffic configs";
             // 
-            // numericUpDown1
+            // spinNumberLoops
             // 
-            this.numericUpDown1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.numericUpDown1.Location = new System.Drawing.Point(163, 26);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
+            this.spinNumberLoops.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.spinNumberLoops.Location = new System.Drawing.Point(163, 26);
+            this.spinNumberLoops.Maximum = new decimal(new int[] {
             999999,
             0,
             0,
             0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(58, 23);
-            this.numericUpDown1.TabIndex = 21;
-            this.numericUpDown1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.numericUpDown1.Value = new decimal(new int[] {
+            this.spinNumberLoops.Name = "spinNumberLoops";
+            this.spinNumberLoops.Size = new System.Drawing.Size(58, 23);
+            this.spinNumberLoops.TabIndex = 21;
+            this.spinNumberLoops.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.spinNumberLoops.Value = new decimal(new int[] {
             100,
             0,
             0,
             0});
-            this.numericUpDown1.Visible = false;
             // 
-            // spinRepeatConditionValue
+            // spinLoopDuration
             // 
-            this.spinRepeatConditionValue.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.spinRepeatConditionValue.Location = new System.Drawing.Point(163, 72);
-            this.spinRepeatConditionValue.Maximum = new decimal(new int[] {
+            this.spinLoopDuration.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.spinLoopDuration.Location = new System.Drawing.Point(163, 72);
+            this.spinLoopDuration.Maximum = new decimal(new int[] {
             1440,
             0,
             0,
             0});
-            this.spinRepeatConditionValue.Minimum = new decimal(new int[] {
+            this.spinLoopDuration.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.spinRepeatConditionValue.Name = "spinRepeatConditionValue";
-            this.spinRepeatConditionValue.Size = new System.Drawing.Size(58, 23);
-            this.spinRepeatConditionValue.TabIndex = 20;
-            this.spinRepeatConditionValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.spinRepeatConditionValue.Value = new decimal(new int[] {
+            this.spinLoopDuration.Name = "spinLoopDuration";
+            this.spinLoopDuration.Size = new System.Drawing.Size(58, 23);
+            this.spinLoopDuration.TabIndex = 20;
+            this.spinLoopDuration.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.spinLoopDuration.Value = new decimal(new int[] {
             480,
             0,
             0,
             0});
-            this.spinRepeatConditionValue.Visible = false;
             // 
-            // lblRepeatConditionValue
+            // label2
             // 
-            this.lblRepeatConditionValue.AutoSize = true;
-            this.lblRepeatConditionValue.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lblRepeatConditionValue.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblRepeatConditionValue.Location = new System.Drawing.Point(9, 76);
-            this.lblRepeatConditionValue.Name = "lblRepeatConditionValue";
-            this.lblRepeatConditionValue.Size = new System.Drawing.Size(128, 15);
-            this.lblRepeatConditionValue.TabIndex = 19;
-            this.lblRepeatConditionValue.Tag = "";
-            this.lblRepeatConditionValue.Text = "Dispersed during (min)";
-            this.lblRepeatConditionValue.Visible = false;
+            this.label2.AutoSize = true;
+            this.label2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.label2.Location = new System.Drawing.Point(9, 76);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(128, 15);
+            this.label2.TabIndex = 19;
+            this.label2.Tag = "";
+            this.label2.Text = "Dispersed during (min)";
             // 
-            // lblRepeatConditionType
+            // label1
             // 
-            this.lblRepeatConditionType.AutoSize = true;
-            this.lblRepeatConditionType.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lblRepeatConditionType.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblRepeatConditionType.Location = new System.Drawing.Point(9, 30);
-            this.lblRepeatConditionType.Name = "lblRepeatConditionType";
-            this.lblRepeatConditionType.Size = new System.Drawing.Size(94, 15);
-            this.lblRepeatConditionType.TabIndex = 18;
-            this.lblRepeatConditionType.Tag = "";
-            this.lblRepeatConditionType.Text = "Number of visits";
+            this.label1.AutoSize = true;
+            this.label1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.label1.Location = new System.Drawing.Point(9, 30);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(146, 15);
+            this.label1.TabIndex = 18;
+            this.label1.Tag = "";
+            this.label1.Text = "Number of visits (per URL)";
             // 
             // lblConfigAvgReadTime
             // 
@@ -345,12 +342,12 @@
             // 
             this.lblTotalLoops.AutoSize = true;
             this.lblTotalLoops.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblTotalLoops.Location = new System.Drawing.Point(12, 430);
+            this.lblTotalLoops.Location = new System.Drawing.Point(13, 409);
             this.lblTotalLoops.Name = "lblTotalLoops";
-            this.lblTotalLoops.Size = new System.Drawing.Size(77, 15);
+            this.lblTotalLoops.Size = new System.Drawing.Size(126, 15);
             this.lblTotalLoops.TabIndex = 17;
-            this.lblTotalLoops.Tag = "Total loops: ";
-            this.lblTotalLoops.Text = "Total loops: 0";
+            this.lblTotalLoops.Tag = "Total visits (per URL): ";
+            this.lblTotalLoops.Text = "Total visits (per URL): 0";
             // 
             // grpConsole
             // 
@@ -363,7 +360,7 @@
             this.grpConsole.Size = new System.Drawing.Size(860, 148);
             this.grpConsole.TabIndex = 18;
             this.grpConsole.TabStop = false;
-            this.grpConsole.Text = "Log";
+            this.grpConsole.Text = "Output Log";
             // 
             // grpBrowser
             // 
@@ -377,7 +374,7 @@
             this.grpBrowser.Size = new System.Drawing.Size(621, 446);
             this.grpBrowser.TabIndex = 19;
             this.grpBrowser.TabStop = false;
-            this.grpBrowser.Text = "Browser (fake)";
+            this.grpBrowser.Text = "Browser";
             // 
             // MainForm
             // 
@@ -400,8 +397,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.picLoading)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.spinRepeatConditionValue)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spinNumberLoops)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spinLoopDuration)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinAvgReadTime)).EndInit();
             this.grpConsole.ResumeLayout(false);
             this.grpConsole.PerformLayout();
@@ -431,10 +428,10 @@
         private System.Windows.Forms.NumericUpDown spinAvgReadTime;
         private System.Windows.Forms.GroupBox grpConsole;
         private System.Windows.Forms.GroupBox grpBrowser;
-        private System.Windows.Forms.NumericUpDown spinRepeatConditionValue;
-        private System.Windows.Forms.Label lblRepeatConditionValue;
-        private System.Windows.Forms.Label lblRepeatConditionType;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown spinLoopDuration;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.NumericUpDown spinNumberLoops;
     }
 }
 
