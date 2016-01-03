@@ -1,4 +1,4 @@
-﻿namespace AdClicky
+﻿namespace WebbyTraffy
 {
     partial class MainForm
     {
@@ -104,7 +104,7 @@
             // btnFileProxies
             // 
             this.btnFileProxies.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.btnFileProxies.Image = global::AdClicky.Properties.Resources.OpenFile;
+            this.btnFileProxies.Image = global::WebbyTraffy.Properties.Resources.OpenFile;
             this.btnFileProxies.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnFileProxies.Location = new System.Drawing.Point(141, 136);
             this.btnFileProxies.Name = "btnFileProxies";
@@ -118,7 +118,7 @@
             // btnFileUrls
             // 
             this.btnFileUrls.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.btnFileUrls.Image = global::AdClicky.Properties.Resources.OpenFile;
+            this.btnFileUrls.Image = global::WebbyTraffy.Properties.Resources.OpenFile;
             this.btnFileUrls.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnFileUrls.Location = new System.Drawing.Point(141, 25);
             this.btnFileUrls.Name = "btnFileUrls";
@@ -221,7 +221,7 @@
             // 
             // picLoading
             // 
-            this.picLoading.Image = global::AdClicky.Properties.Resources.LoadingAnimation;
+            this.picLoading.Image = global::WebbyTraffy.Properties.Resources.LoadingAnimation;
             this.picLoading.Location = new System.Drawing.Point(684, 200);
             this.picLoading.Name = "picLoading";
             this.picLoading.Size = new System.Drawing.Size(28, 42);

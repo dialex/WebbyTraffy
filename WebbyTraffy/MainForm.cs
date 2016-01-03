@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 
-namespace AdClicky
+namespace WebbyTraffy
 {
     public partial class MainForm : System.Windows.Forms.Form
     {
