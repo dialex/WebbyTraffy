@@ -67,6 +67,7 @@ namespace WebbyTraffy
             // Set default configs
             chkConfigSimulateBrowser.Checked = true;
             chkConfigSimulateCountries.Checked = true;
+            spinAvgReadTime.Minimum = VISIT_TIME_MINVALID;
         }
 
         private void btnActionBrowser_Click(object sender, EventArgs e)
