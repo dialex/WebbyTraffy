@@ -62,7 +62,6 @@ namespace WebbyTraffy
             // Set default configs
             chkConfigSimulateBrowser.Checked = true;
             chkConfigSimulateCountries.Checked = true;
-            comboRepeatConditionType.SelectedIndex = 0;
         }
 
         private void btnActionBrowser_Click(object sender, EventArgs e)
@@ -89,12 +88,7 @@ namespace WebbyTraffy
             }
         }
 
-        #region Eventos
-
-        private void comboRepeatConditionType_SelectedValueChanged(object sender, EventArgs e)
-        {
-            //throw new NotImplementedException();
-        }
+        #region Events
 
         #endregion
 

@@ -42,10 +42,10 @@
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.picLoading = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.spinRepeatConditionValue = new System.Windows.Forms.NumericUpDown();
             this.lblRepeatConditionValue = new System.Windows.Forms.Label();
             this.lblRepeatConditionType = new System.Windows.Forms.Label();
-            this.comboRepeatConditionType = new System.Windows.Forms.ComboBox();
             this.lblConfigAvgReadTime = new System.Windows.Forms.Label();
             this.spinAvgReadTime = new System.Windows.Forms.NumericUpDown();
             this.lblTotalLoops = new System.Windows.Forms.Label();
@@ -54,6 +54,7 @@
             this.grpConfigs.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLoading)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinRepeatConditionValue)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinAvgReadTime)).BeginInit();
             this.grpConsole.SuspendLayout();
@@ -65,12 +66,12 @@
             this.lblTotalUrlsToVisit.AutoSize = true;
             this.lblTotalUrlsToVisit.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblTotalUrlsToVisit.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblTotalUrlsToVisit.Location = new System.Drawing.Point(9, 29);
+            this.lblTotalUrlsToVisit.Location = new System.Drawing.Point(9, 31);
             this.lblTotalUrlsToVisit.Name = "lblTotalUrlsToVisit";
-            this.lblTotalUrlsToVisit.Size = new System.Drawing.Size(112, 15);
+            this.lblTotalUrlsToVisit.Size = new System.Drawing.Size(110, 15);
             this.lblTotalUrlsToVisit.TabIndex = 3;
-            this.lblTotalUrlsToVisit.Tag = "URLs to visit: ";
-            this.lblTotalUrlsToVisit.Text = "URLs to visit: (none)";
+            this.lblTotalUrlsToVisit.Tag = "Target URLs: ";
+            this.lblTotalUrlsToVisit.Text = "Target URLs: (none)";
             this.lblTotalUrlsToVisit.Click += new System.EventHandler(this.lblUrlsToCall_Click);
             // 
             // webBrowser
@@ -117,12 +118,12 @@
             this.btnFileProxies.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnFileProxies.Image = global::WebbyTraffy.Properties.Resources.OpenFile;
             this.btnFileProxies.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnFileProxies.Location = new System.Drawing.Point(141, 136);
+            this.btnFileProxies.Location = new System.Drawing.Point(141, 138);
             this.btnFileProxies.Name = "btnFileProxies";
-            this.btnFileProxies.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            this.btnFileProxies.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
             this.btnFileProxies.Size = new System.Drawing.Size(80, 23);
             this.btnFileProxies.TabIndex = 15;
-            this.btnFileProxies.Text = "Load...";
+            this.btnFileProxies.Text = "Import...";
             this.btnFileProxies.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnFileProxies.UseVisualStyleBackColor = true;
             // 
@@ -131,12 +132,12 @@
             this.btnFileUrls.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnFileUrls.Image = global::WebbyTraffy.Properties.Resources.OpenFile;
             this.btnFileUrls.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnFileUrls.Location = new System.Drawing.Point(141, 25);
+            this.btnFileUrls.Location = new System.Drawing.Point(141, 27);
             this.btnFileUrls.Name = "btnFileUrls";
-            this.btnFileUrls.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            this.btnFileUrls.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
             this.btnFileUrls.Size = new System.Drawing.Size(80, 23);
             this.btnFileUrls.TabIndex = 12;
-            this.btnFileUrls.Text = "Load...";
+            this.btnFileUrls.Text = "Import...";
             this.btnFileUrls.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnFileUrls.UseVisualStyleBackColor = true;
             this.btnFileUrls.Click += new System.EventHandler(this.btnFileUrls_Click);
@@ -147,7 +148,7 @@
             this.chkConfigSimulateOpSystem.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.chkConfigSimulateOpSystem.Enabled = false;
             this.chkConfigSimulateOpSystem.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.chkConfigSimulateOpSystem.Location = new System.Drawing.Point(9, 63);
+            this.chkConfigSimulateOpSystem.Location = new System.Drawing.Point(9, 65);
             this.chkConfigSimulateOpSystem.Name = "chkConfigSimulateOpSystem";
             this.chkConfigSimulateOpSystem.Size = new System.Drawing.Size(90, 19);
             this.chkConfigSimulateOpSystem.TabIndex = 2;
@@ -159,11 +160,11 @@
             this.chkConfigSimulateCountries.AutoSize = true;
             this.chkConfigSimulateCountries.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.chkConfigSimulateCountries.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.chkConfigSimulateCountries.Location = new System.Drawing.Point(9, 139);
+            this.chkConfigSimulateCountries.Location = new System.Drawing.Point(9, 141);
             this.chkConfigSimulateCountries.Name = "chkConfigSimulateCountries";
-            this.chkConfigSimulateCountries.Size = new System.Drawing.Size(126, 19);
+            this.chkConfigSimulateCountries.Size = new System.Drawing.Size(124, 19);
             this.chkConfigSimulateCountries.TabIndex = 1;
-            this.chkConfigSimulateCountries.Text = "Simulate Countries";
+            this.chkConfigSimulateCountries.Text = "Simulate countries";
             this.chkConfigSimulateCountries.UseVisualStyleBackColor = true;
             // 
             // chkConfigSimulateBrowser
@@ -171,11 +172,11 @@
             this.chkConfigSimulateBrowser.AutoSize = true;
             this.chkConfigSimulateBrowser.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.chkConfigSimulateBrowser.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.chkConfigSimulateBrowser.Location = new System.Drawing.Point(9, 101);
+            this.chkConfigSimulateBrowser.Location = new System.Drawing.Point(9, 103);
             this.chkConfigSimulateBrowser.Name = "chkConfigSimulateBrowser";
             this.chkConfigSimulateBrowser.Size = new System.Drawing.Size(122, 19);
             this.chkConfigSimulateBrowser.TabIndex = 0;
-            this.chkConfigSimulateBrowser.Text = "Simulate Browsers";
+            this.chkConfigSimulateBrowser.Text = "Simulate browsers";
             this.chkConfigSimulateBrowser.UseVisualStyleBackColor = true;
             // 
             // lblTotalVisits
@@ -220,10 +221,10 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.numericUpDown1);
             this.groupBox1.Controls.Add(this.spinRepeatConditionValue);
             this.groupBox1.Controls.Add(this.lblRepeatConditionValue);
             this.groupBox1.Controls.Add(this.lblRepeatConditionType);
-            this.groupBox1.Controls.Add(this.comboRepeatConditionType);
             this.groupBox1.Controls.Add(this.lblConfigAvgReadTime);
             this.groupBox1.Controls.Add(this.spinAvgReadTime);
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
@@ -234,12 +235,32 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Traffic configs";
             // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.numericUpDown1.Location = new System.Drawing.Point(163, 26);
+            this.numericUpDown1.Maximum = new decimal(new int[] {
+            999999,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(58, 23);
+            this.numericUpDown1.TabIndex = 21;
+            this.numericUpDown1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numericUpDown1.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Visible = false;
+            // 
             // spinRepeatConditionValue
             // 
             this.spinRepeatConditionValue.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.spinRepeatConditionValue.Location = new System.Drawing.Point(155, 122);
+            this.spinRepeatConditionValue.Location = new System.Drawing.Point(163, 72);
             this.spinRepeatConditionValue.Maximum = new decimal(new int[] {
-            999,
+            1440,
             0,
             0,
             0});
@@ -249,68 +270,57 @@
             0,
             0});
             this.spinRepeatConditionValue.Name = "spinRepeatConditionValue";
-            this.spinRepeatConditionValue.Size = new System.Drawing.Size(66, 23);
+            this.spinRepeatConditionValue.Size = new System.Drawing.Size(58, 23);
             this.spinRepeatConditionValue.TabIndex = 20;
             this.spinRepeatConditionValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.spinRepeatConditionValue.Value = new decimal(new int[] {
-            1,
+            480,
             0,
             0,
             0});
+            this.spinRepeatConditionValue.Visible = false;
             // 
             // lblRepeatConditionValue
             // 
             this.lblRepeatConditionValue.AutoSize = true;
             this.lblRepeatConditionValue.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblRepeatConditionValue.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblRepeatConditionValue.Location = new System.Drawing.Point(9, 126);
+            this.lblRepeatConditionValue.Location = new System.Drawing.Point(9, 76);
             this.lblRepeatConditionValue.Name = "lblRepeatConditionValue";
-            this.lblRepeatConditionValue.Size = new System.Drawing.Size(136, 15);
+            this.lblRepeatConditionValue.Size = new System.Drawing.Size(128, 15);
             this.lblRepeatConditionValue.TabIndex = 19;
             this.lblRepeatConditionValue.Tag = "";
-            this.lblRepeatConditionValue.Text = "[Repeat condition value]";
+            this.lblRepeatConditionValue.Text = "Dispersed during (min)";
+            this.lblRepeatConditionValue.Visible = false;
             // 
             // lblRepeatConditionType
             // 
             this.lblRepeatConditionType.AutoSize = true;
             this.lblRepeatConditionType.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblRepeatConditionType.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblRepeatConditionType.Location = new System.Drawing.Point(9, 80);
+            this.lblRepeatConditionType.Location = new System.Drawing.Point(9, 30);
             this.lblRepeatConditionType.Name = "lblRepeatConditionType";
-            this.lblRepeatConditionType.Size = new System.Drawing.Size(122, 15);
+            this.lblRepeatConditionType.Size = new System.Drawing.Size(94, 15);
             this.lblRepeatConditionType.TabIndex = 18;
             this.lblRepeatConditionType.Tag = "";
-            this.lblRepeatConditionType.Text = "Repeat according to...";
-            // 
-            // comboRepeatConditionType
-            // 
-            this.comboRepeatConditionType.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.comboRepeatConditionType.FormattingEnabled = true;
-            this.comboRepeatConditionType.Items.AddRange(new object[] {
-            "Loops",
-            "Time"});
-            this.comboRepeatConditionType.Location = new System.Drawing.Point(155, 76);
-            this.comboRepeatConditionType.Name = "comboRepeatConditionType";
-            this.comboRepeatConditionType.Size = new System.Drawing.Size(66, 23);
-            this.comboRepeatConditionType.TabIndex = 17;
-            this.comboRepeatConditionType.SelectedValueChanged += new System.EventHandler(this.comboRepeatConditionType_SelectedValueChanged);
+            this.lblRepeatConditionType.Text = "Number of visits";
             // 
             // lblConfigAvgReadTime
             // 
             this.lblConfigAvgReadTime.AutoSize = true;
             this.lblConfigAvgReadTime.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblConfigAvgReadTime.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblConfigAvgReadTime.Location = new System.Drawing.Point(9, 34);
+            this.lblConfigAvgReadTime.Location = new System.Drawing.Point(9, 123);
             this.lblConfigAvgReadTime.Name = "lblConfigAvgReadTime";
-            this.lblConfigAvgReadTime.Size = new System.Drawing.Size(133, 15);
+            this.lblConfigAvgReadTime.Size = new System.Drawing.Size(105, 15);
             this.lblConfigAvgReadTime.TabIndex = 16;
             this.lblConfigAvgReadTime.Tag = "";
-            this.lblConfigAvgReadTime.Text = "Avg. Visit Duration (sec)";
+            this.lblConfigAvgReadTime.Text = "Visit duration (sec)";
             // 
             // spinAvgReadTime
             // 
             this.spinAvgReadTime.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.spinAvgReadTime.Location = new System.Drawing.Point(155, 30);
+            this.spinAvgReadTime.Location = new System.Drawing.Point(163, 119);
             this.spinAvgReadTime.Maximum = new decimal(new int[] {
             300,
             0,
@@ -322,7 +332,7 @@
             0,
             0});
             this.spinAvgReadTime.Name = "spinAvgReadTime";
-            this.spinAvgReadTime.Size = new System.Drawing.Size(66, 23);
+            this.spinAvgReadTime.Size = new System.Drawing.Size(58, 23);
             this.spinAvgReadTime.TabIndex = 0;
             this.spinAvgReadTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.spinAvgReadTime.Value = new decimal(new int[] {
@@ -390,6 +400,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.picLoading)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinRepeatConditionValue)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinAvgReadTime)).EndInit();
             this.grpConsole.ResumeLayout(false);
@@ -423,7 +434,7 @@
         private System.Windows.Forms.NumericUpDown spinRepeatConditionValue;
         private System.Windows.Forms.Label lblRepeatConditionValue;
         private System.Windows.Forms.Label lblRepeatConditionType;
-        private System.Windows.Forms.ComboBox comboRepeatConditionType;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
     }
 }
 
