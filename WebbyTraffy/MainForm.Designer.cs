@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lblUrlsToCall = new System.Windows.Forms.Label();
+            this.lblTotalUrlsToVisit = new System.Windows.Forms.Label();
             this.webBrowser = new System.Windows.Forms.WebBrowser();
             this.btnActionBrowser = new System.Windows.Forms.Button();
             this.grpConfigs = new System.Windows.Forms.GroupBox();
@@ -37,7 +37,7 @@
             this.chkConfigSimulateOpSystem = new System.Windows.Forms.CheckBox();
             this.chkConfigSimulateCountries = new System.Windows.Forms.CheckBox();
             this.chkConfigSimulateBrowser = new System.Windows.Forms.CheckBox();
-            this.lblTotalCalls = new System.Windows.Forms.Label();
+            this.lblTotalVisits = new System.Windows.Forms.Label();
             this.txtLogger = new System.Windows.Forms.TextBox();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.picLoading = new System.Windows.Forms.PictureBox();
@@ -48,7 +48,7 @@
             this.comboRepeatConditionType = new System.Windows.Forms.ComboBox();
             this.lblConfigAvgReadTime = new System.Windows.Forms.Label();
             this.spinAvgReadTime = new System.Windows.Forms.NumericUpDown();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblTotalLoops = new System.Windows.Forms.Label();
             this.grpConsole = new System.Windows.Forms.GroupBox();
             this.grpBrowser = new System.Windows.Forms.GroupBox();
             this.grpConfigs.SuspendLayout();
@@ -60,18 +60,18 @@
             this.grpBrowser.SuspendLayout();
             this.SuspendLayout();
             // 
-            // lblUrlsToCall
+            // lblTotalUrlsToVisit
             // 
-            this.lblUrlsToCall.AutoSize = true;
-            this.lblUrlsToCall.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lblUrlsToCall.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblUrlsToCall.Location = new System.Drawing.Point(9, 29);
-            this.lblUrlsToCall.Name = "lblUrlsToCall";
-            this.lblUrlsToCall.Size = new System.Drawing.Size(112, 15);
-            this.lblUrlsToCall.TabIndex = 3;
-            this.lblUrlsToCall.Tag = "URLs to visit: ";
-            this.lblUrlsToCall.Text = "URLs to visit: (none)";
-            this.lblUrlsToCall.Click += new System.EventHandler(this.lblUrlsToCall_Click);
+            this.lblTotalUrlsToVisit.AutoSize = true;
+            this.lblTotalUrlsToVisit.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblTotalUrlsToVisit.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblTotalUrlsToVisit.Location = new System.Drawing.Point(9, 29);
+            this.lblTotalUrlsToVisit.Name = "lblTotalUrlsToVisit";
+            this.lblTotalUrlsToVisit.Size = new System.Drawing.Size(112, 15);
+            this.lblTotalUrlsToVisit.TabIndex = 3;
+            this.lblTotalUrlsToVisit.Tag = "URLs to visit: ";
+            this.lblTotalUrlsToVisit.Text = "URLs to visit: (none)";
+            this.lblTotalUrlsToVisit.Click += new System.EventHandler(this.lblUrlsToCall_Click);
             // 
             // webBrowser
             // 
@@ -103,7 +103,7 @@
             this.grpConfigs.Controls.Add(this.chkConfigSimulateOpSystem);
             this.grpConfigs.Controls.Add(this.chkConfigSimulateCountries);
             this.grpConfigs.Controls.Add(this.chkConfigSimulateBrowser);
-            this.grpConfigs.Controls.Add(this.lblUrlsToCall);
+            this.grpConfigs.Controls.Add(this.lblTotalUrlsToVisit);
             this.grpConfigs.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.grpConfigs.Location = new System.Drawing.Point(12, 12);
             this.grpConfigs.Name = "grpConfigs";
@@ -178,16 +178,16 @@
             this.chkConfigSimulateBrowser.Text = "Simulate Browsers";
             this.chkConfigSimulateBrowser.UseVisualStyleBackColor = true;
             // 
-            // lblTotalCalls
+            // lblTotalVisits
             // 
-            this.lblTotalCalls.AutoSize = true;
-            this.lblTotalCalls.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblTotalCalls.Location = new System.Drawing.Point(12, 409);
-            this.lblTotalCalls.Name = "lblTotalCalls";
-            this.lblTotalCalls.Size = new System.Drawing.Size(74, 15);
-            this.lblTotalCalls.TabIndex = 8;
-            this.lblTotalCalls.Tag = "Total visits: ";
-            this.lblTotalCalls.Text = "Total visits: 0";
+            this.lblTotalVisits.AutoSize = true;
+            this.lblTotalVisits.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblTotalVisits.Location = new System.Drawing.Point(12, 409);
+            this.lblTotalVisits.Name = "lblTotalVisits";
+            this.lblTotalVisits.Size = new System.Drawing.Size(74, 15);
+            this.lblTotalVisits.TabIndex = 8;
+            this.lblTotalVisits.Tag = "Total visits: ";
+            this.lblTotalVisits.Text = "Total visits: 0";
             // 
             // txtLogger
             // 
@@ -287,8 +287,8 @@
             this.comboRepeatConditionType.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.comboRepeatConditionType.FormattingEnabled = true;
             this.comboRepeatConditionType.Items.AddRange(new object[] {
-            "Time",
-            "Loops"});
+            "Loops",
+            "Time"});
             this.comboRepeatConditionType.Location = new System.Drawing.Point(155, 76);
             this.comboRepeatConditionType.Name = "comboRepeatConditionType";
             this.comboRepeatConditionType.Size = new System.Drawing.Size(66, 23);
@@ -331,16 +331,16 @@
             0,
             0});
             // 
-            // label1
+            // lblTotalLoops
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.label1.Location = new System.Drawing.Point(12, 430);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(77, 15);
-            this.label1.TabIndex = 17;
-            this.label1.Tag = "Total loops: ";
-            this.label1.Text = "Total loops: 0";
+            this.lblTotalLoops.AutoSize = true;
+            this.lblTotalLoops.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblTotalLoops.Location = new System.Drawing.Point(12, 430);
+            this.lblTotalLoops.Name = "lblTotalLoops";
+            this.lblTotalLoops.Size = new System.Drawing.Size(77, 15);
+            this.lblTotalLoops.TabIndex = 17;
+            this.lblTotalLoops.Tag = "Total loops: ";
+            this.lblTotalLoops.Text = "Total loops: 0";
             // 
             // grpConsole
             // 
@@ -376,11 +376,11 @@
             this.ClientSize = new System.Drawing.Size(884, 616);
             this.Controls.Add(this.grpBrowser);
             this.Controls.Add(this.grpConsole);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblTotalLoops);
             this.Controls.Add(this.btnActionBrowser);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.picLoading);
-            this.Controls.Add(this.lblTotalCalls);
+            this.Controls.Add(this.lblTotalVisits);
             this.Controls.Add(this.grpConfigs);
             this.MinimumSize = new System.Drawing.Size(16, 655);
             this.Name = "MainForm";
@@ -401,21 +401,21 @@
         }
 
         #endregion
-        private System.Windows.Forms.Label lblUrlsToCall;
+        private System.Windows.Forms.Label lblTotalUrlsToVisit;
         private System.Windows.Forms.WebBrowser webBrowser;
         private System.Windows.Forms.Button btnActionBrowser;
         private System.Windows.Forms.GroupBox grpConfigs;
         private System.Windows.Forms.CheckBox chkConfigSimulateOpSystem;
         private System.Windows.Forms.CheckBox chkConfigSimulateCountries;
         private System.Windows.Forms.CheckBox chkConfigSimulateBrowser;
-        private System.Windows.Forms.Label lblTotalCalls;
+        private System.Windows.Forms.Label lblTotalVisits;
         private System.Windows.Forms.TextBox txtLogger;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.Button btnFileUrls;
         private System.Windows.Forms.Button btnFileProxies;
         private System.Windows.Forms.PictureBox picLoading;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblTotalLoops;
         private System.Windows.Forms.Label lblConfigAvgReadTime;
         private System.Windows.Forms.NumericUpDown spinAvgReadTime;
         private System.Windows.Forms.GroupBox grpConsole;

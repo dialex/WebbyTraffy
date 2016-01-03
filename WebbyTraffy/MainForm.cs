@@ -18,12 +18,17 @@ namespace WebbyTraffy
         #endregion
         #region Configs
 
-        private readonly string WHITESPACE_S = "  ";
-        private readonly string WHITESPACE_M = "    ";
-        private readonly string SEPARATOR_DASHES = "------------------------------------------------------";
+        private static readonly char LINE_THIN_CHAR = '-';
+        private static readonly char LINE_STRONG_CHAR = '#';
+        private static readonly string LINE_THIN = new string(LINE_THIN_CHAR, 60);
+        private static readonly string LINE_STRONG = new string(LINE_STRONG_CHAR, 60);
+        private static readonly string WHITESPACE_S = new string(' ', 2);
+        private static readonly string WHITESPACE_M = new string(' ', 4);
 
-        private List<Uri> UrlsToCall;
-        
+        private int TotalVisits;
+        private int TotalLoops;
+        private List<Uri> UrlsToVisit;
+
         #endregion
 
         public MainForm()
@@ -35,7 +40,8 @@ namespace WebbyTraffy
         private void Init()
         {
             Log("Initializing...");
-            UrlsToCall = new List<Uri>();
+            UrlsToVisit = new List<Uri>();
+            ResetCounters();
 
             // Import default configs
             try
@@ -56,34 +62,38 @@ namespace WebbyTraffy
             // Set default configs
             chkConfigSimulateBrowser.Checked = true;
             chkConfigSimulateCountries.Checked = true;
+            comboRepeatConditionType.SelectedIndex = 0;
         }
 
         private void btnActionBrowser_Click(object sender, EventArgs e)
         {
-            picLoading.Visible = true;
             try
             {
-                for (int i = 1; i <= 20; i++)
-                {
-                    SimulateBrowsing("http://adf.ly/10475475/gmod-textures");
-                    Thread.Sleep(1000 * 15);
-                    SimulateBrowsing("http://www.diogonunes.com/blog/too-weird-to-live-too-unique-to-die/");
+                picLoading.Visible = true;
 
-                    lblTotalCalls.Text = lblTotalCalls.Tag.ToString() + i.ToString();
+                foreach (Uri url in UrlsToVisit)
+                {
+                    SimulateBrowsing(url.ToString());
+                    RefreshTotalVisits(1);
+                    WaitBeforeNext();
                 }
+                RefreshTotalLoops(1);
             }
             catch (Exception error)
             {
-                ShowAndLogErrorMsg("KABOOM!", error.Message);
+                ShowAndLogErrorMsg("An error occurred while visiting the URL." + Environment.NewLine + "The app will stop the execution.", error.Message);
             }
-            finally { picLoading.Visible = false; }
+            finally
+            {
+                picLoading.Visible = false;
+            }
         }
 
         #region Eventos
 
         private void comboRepeatConditionType_SelectedValueChanged(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         #endregion
@@ -123,23 +133,35 @@ namespace WebbyTraffy
 
         private void RefreshTotalUrls()
         {
-            lblUrlsToCall.Text = lblUrlsToCall.Tag.ToString() + UrlsToCall.Count;
+            lblTotalUrlsToVisit.Text = lblTotalUrlsToVisit.Tag.ToString() + UrlsToVisit.Count;
+        }
+
+        private void RefreshTotalLoops(int increment)
+        {
+            TotalLoops += increment;
+            lblTotalLoops.Text = lblTotalLoops.Tag.ToString() + TotalLoops.ToString();
+        }
+
+        private void RefreshTotalVisits(int increment)
+        {
+            TotalVisits += increment;
+            lblTotalVisits.Text = lblTotalVisits.Tag.ToString() + TotalVisits.ToString();
         }
 
         private void DisplayUrlsToCall()
         {
             StringBuilder str = new StringBuilder();
-            foreach (Uri url in UrlsToCall)
+            foreach (Uri url in UrlsToVisit)
             {
                 str.AppendLine(url.ToString());
             }
 
             if (str.Length > 0)
             {
-                ShowInfoMsg("Check the output console below.");
-                Log(SEPARATOR_DASHES);
+                Log(LINE_THIN);
+                Log("URLs that will be visited:");
                 Log(str.ToString(), false);
-                Log(SEPARATOR_DASHES);
+                Log(LINE_THIN);
             }
             else ShowInfoMsg("You should load a file containing the URLs to be called by this app.");
         }
@@ -151,10 +173,9 @@ namespace WebbyTraffy
         void SimulateBrowsing(string url)
         {
             Browser browserHeader = GetRandomBrowser();
-            MockCountry();
+            //Proxy countryProxy = GetRandomProxy();
             OpenUrl(url, browserHeader);
-            MockReadingTime(10);
-            WaitBeforeNext();
+            SimulateReading();
         }
 
         private void WaitBeforeNext()
@@ -162,12 +183,7 @@ namespace WebbyTraffy
             //TODO
         }
 
-        private void MockReadingTime(int v)
-        {
-            //TODO
-        }
-
-        private void MockCountry()
+        private void SimulateReading()
         {
             //TODO
         }
@@ -186,6 +202,11 @@ namespace WebbyTraffy
 
         #region Helper methods
 
+        private void ResetCounters()
+        {
+            TotalLoops = TotalVisits = 0;
+        }
+
         // URLs
         
         private void LoadUrls(Stream file)
@@ -196,7 +217,7 @@ namespace WebbyTraffy
 
             try
             {
-                UrlsToCall.Clear();
+                UrlsToVisit.Clear();
                 Log("Cleared URL calling list.");
 
                 Log("Loading URLs...");
@@ -211,7 +232,7 @@ namespace WebbyTraffy
 
                         if (isValidUrl)
                         {
-                            UrlsToCall.Add(validatedUrl);
+                            UrlsToVisit.Add(validatedUrl);
                             numValidUrls++;
                         }
                         else
