@@ -52,6 +52,10 @@ namespace WebbyTraffy
             {
                 ShowAndLogErrorMsg("Something went wrong while reading the default configurations.", error.Message);
             }
+
+            // Set default configs
+            chkConfigSimulateBrowser.Checked = true;
+            chkConfigSimulateCountries.Checked = true;
         }
 
         private void btnActionBrowser_Click(object sender, EventArgs e)
@@ -74,6 +78,15 @@ namespace WebbyTraffy
             }
             finally { picLoading.Visible = false; }
         }
+
+        #region Eventos
+
+        private void comboRepeatConditionType_SelectedValueChanged(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
 
         #region Buttons
 
@@ -306,25 +319,4 @@ namespace WebbyTraffy
     }
 
     #endregion
-
-    public class CookieAwareWebClient : WebClient
-    {
-        public CookieAwareWebClient()
-        {
-            CookieContainer = new CookieContainer();
-        }
-
-        public CookieContainer CookieContainer { get; private set; }
-
-        protected override WebRequest GetWebRequest(Uri address)
-        {
-            var request = base.GetWebRequest(address);
-            var httpRequest = request as HttpWebRequest;
-            if (httpRequest != null)
-            {
-                httpRequest.CookieContainer = CookieContainer;
-            }
-            return request;
-        }
-    }
 }

@@ -39,12 +39,25 @@
             this.chkConfigSimulateBrowser = new System.Windows.Forms.CheckBox();
             this.lblTotalCalls = new System.Windows.Forms.Label();
             this.txtLogger = new System.Windows.Forms.TextBox();
-            this.lblLogger = new System.Windows.Forms.Label();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.label3 = new System.Windows.Forms.Label();
             this.picLoading = new System.Windows.Forms.PictureBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.spinRepeatConditionValue = new System.Windows.Forms.NumericUpDown();
+            this.lblRepeatConditionValue = new System.Windows.Forms.Label();
+            this.lblRepeatConditionType = new System.Windows.Forms.Label();
+            this.comboRepeatConditionType = new System.Windows.Forms.ComboBox();
+            this.lblConfigAvgReadTime = new System.Windows.Forms.Label();
+            this.spinAvgReadTime = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
+            this.grpConsole = new System.Windows.Forms.GroupBox();
+            this.grpBrowser = new System.Windows.Forms.GroupBox();
             this.grpConfigs.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLoading)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.spinRepeatConditionValue)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spinAvgReadTime)).BeginInit();
+            this.grpConsole.SuspendLayout();
+            this.grpBrowser.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblUrlsToCall
@@ -54,32 +67,30 @@
             this.lblUrlsToCall.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.lblUrlsToCall.Location = new System.Drawing.Point(9, 29);
             this.lblUrlsToCall.Name = "lblUrlsToCall";
-            this.lblUrlsToCall.Size = new System.Drawing.Size(109, 15);
+            this.lblUrlsToCall.Size = new System.Drawing.Size(112, 15);
             this.lblUrlsToCall.TabIndex = 3;
-            this.lblUrlsToCall.Tag = "URLs to call: ";
-            this.lblUrlsToCall.Text = "URLs to call: (none)";
+            this.lblUrlsToCall.Tag = "URLs to visit: ";
+            this.lblUrlsToCall.Text = "URLs to visit: (none)";
             this.lblUrlsToCall.Click += new System.EventHandler(this.lblUrlsToCall_Click);
             // 
             // webBrowser
             // 
-            this.webBrowser.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.webBrowser.Dock = System.Windows.Forms.DockStyle.Fill;
             this.webBrowser.IsWebBrowserContextMenuEnabled = false;
-            this.webBrowser.Location = new System.Drawing.Point(15, 266);
+            this.webBrowser.Location = new System.Drawing.Point(3, 19);
             this.webBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser.Name = "webBrowser";
             this.webBrowser.ScriptErrorsSuppressed = true;
-            this.webBrowser.Size = new System.Drawing.Size(895, 164);
+            this.webBrowser.Size = new System.Drawing.Size(615, 424);
             this.webBrowser.TabIndex = 5;
             this.webBrowser.WebBrowserShortcutsEnabled = false;
             // 
             // btnActionBrowser
             // 
             this.btnActionBrowser.Font = new System.Drawing.Font("Segoe UI Light", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnActionBrowser.Location = new System.Drawing.Point(718, 200);
+            this.btnActionBrowser.Location = new System.Drawing.Point(12, 358);
             this.btnActionBrowser.Name = "btnActionBrowser";
-            this.btnActionBrowser.Size = new System.Drawing.Size(192, 42);
+            this.btnActionBrowser.Size = new System.Drawing.Size(233, 42);
             this.btnActionBrowser.TabIndex = 6;
             this.btnActionBrowser.Text = "DO IT!";
             this.btnActionBrowser.UseVisualStyleBackColor = true;
@@ -93,13 +104,13 @@
             this.grpConfigs.Controls.Add(this.chkConfigSimulateCountries);
             this.grpConfigs.Controls.Add(this.chkConfigSimulateBrowser);
             this.grpConfigs.Controls.Add(this.lblUrlsToCall);
-            this.grpConfigs.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.grpConfigs.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.grpConfigs.Location = new System.Drawing.Point(12, 12);
             this.grpConfigs.Name = "grpConfigs";
             this.grpConfigs.Size = new System.Drawing.Size(233, 182);
             this.grpConfigs.TabIndex = 7;
             this.grpConfigs.TabStop = false;
-            this.grpConfigs.Text = "Configurations";
+            this.grpConfigs.Text = "Simulation configs";
             // 
             // btnFileProxies
             // 
@@ -147,8 +158,6 @@
             // 
             this.chkConfigSimulateCountries.AutoSize = true;
             this.chkConfigSimulateCountries.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chkConfigSimulateCountries.Checked = true;
-            this.chkConfigSimulateCountries.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkConfigSimulateCountries.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.chkConfigSimulateCountries.Location = new System.Drawing.Point(9, 139);
             this.chkConfigSimulateCountries.Name = "chkConfigSimulateCountries";
@@ -161,8 +170,6 @@
             // 
             this.chkConfigSimulateBrowser.AutoSize = true;
             this.chkConfigSimulateBrowser.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chkConfigSimulateBrowser.Checked = true;
-            this.chkConfigSimulateBrowser.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkConfigSimulateBrowser.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.chkConfigSimulateBrowser.Location = new System.Drawing.Point(9, 101);
             this.chkConfigSimulateBrowser.Name = "chkConfigSimulateBrowser";
@@ -175,54 +182,35 @@
             // 
             this.lblTotalCalls.AutoSize = true;
             this.lblTotalCalls.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblTotalCalls.Location = new System.Drawing.Point(798, 245);
+            this.lblTotalCalls.Location = new System.Drawing.Point(12, 409);
             this.lblTotalCalls.Name = "lblTotalCalls";
-            this.lblTotalCalls.Size = new System.Drawing.Size(33, 15);
+            this.lblTotalCalls.Size = new System.Drawing.Size(74, 15);
             this.lblTotalCalls.TabIndex = 8;
-            this.lblTotalCalls.Tag = "Total: ";
-            this.lblTotalCalls.Text = "Total";
+            this.lblTotalCalls.Tag = "Total visits: ";
+            this.lblTotalCalls.Text = "Total visits: 0";
             // 
             // txtLogger
             // 
-            this.txtLogger.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtLogger.BackColor = System.Drawing.Color.Black;
+            this.txtLogger.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtLogger.Font = new System.Drawing.Font("Consolas", 9F);
-            this.txtLogger.Location = new System.Drawing.Point(12, 451);
+            this.txtLogger.ForeColor = System.Drawing.Color.White;
+            this.txtLogger.Location = new System.Drawing.Point(3, 19);
             this.txtLogger.Multiline = true;
             this.txtLogger.Name = "txtLogger";
             this.txtLogger.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtLogger.Size = new System.Drawing.Size(898, 148);
+            this.txtLogger.Size = new System.Drawing.Size(854, 126);
             this.txtLogger.TabIndex = 9;
-            // 
-            // lblLogger
-            // 
-            this.lblLogger.AutoSize = true;
-            this.lblLogger.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblLogger.Location = new System.Drawing.Point(12, 433);
-            this.lblLogger.Name = "lblLogger";
-            this.lblLogger.Size = new System.Drawing.Size(267, 15);
-            this.lblLogger.TabIndex = 11;
-            this.lblLogger.Text = "Console          (what\'s happening under the hood)";
             // 
             // openFileDialog
             // 
             this.openFileDialog.DereferenceLinks = false;
             this.openFileDialog.Filter = "\"Text|*.txt|All|*.*\"";
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.label3.Location = new System.Drawing.Point(12, 248);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(76, 15);
-            this.label3.TabIndex = 14;
-            this.label3.Text = "Fake browser";
-            // 
             // picLoading
             // 
             this.picLoading.Image = global::WebbyTraffy.Properties.Resources.LoadingAnimation;
-            this.picLoading.Location = new System.Drawing.Point(684, 200);
+            this.picLoading.Location = new System.Drawing.Point(217, 406);
             this.picLoading.Name = "picLoading";
             this.picLoading.Size = new System.Drawing.Size(28, 42);
             this.picLoading.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -230,24 +218,183 @@
             this.picLoading.TabStop = false;
             this.picLoading.Visible = false;
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.spinRepeatConditionValue);
+            this.groupBox1.Controls.Add(this.lblRepeatConditionValue);
+            this.groupBox1.Controls.Add(this.lblRepeatConditionType);
+            this.groupBox1.Controls.Add(this.comboRepeatConditionType);
+            this.groupBox1.Controls.Add(this.lblConfigAvgReadTime);
+            this.groupBox1.Controls.Add(this.spinAvgReadTime);
+            this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.groupBox1.Location = new System.Drawing.Point(12, 200);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(233, 152);
+            this.groupBox1.TabIndex = 16;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Traffic configs";
+            // 
+            // spinRepeatConditionValue
+            // 
+            this.spinRepeatConditionValue.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.spinRepeatConditionValue.Location = new System.Drawing.Point(155, 122);
+            this.spinRepeatConditionValue.Maximum = new decimal(new int[] {
+            999,
+            0,
+            0,
+            0});
+            this.spinRepeatConditionValue.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.spinRepeatConditionValue.Name = "spinRepeatConditionValue";
+            this.spinRepeatConditionValue.Size = new System.Drawing.Size(66, 23);
+            this.spinRepeatConditionValue.TabIndex = 20;
+            this.spinRepeatConditionValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.spinRepeatConditionValue.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // lblRepeatConditionValue
+            // 
+            this.lblRepeatConditionValue.AutoSize = true;
+            this.lblRepeatConditionValue.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblRepeatConditionValue.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblRepeatConditionValue.Location = new System.Drawing.Point(9, 126);
+            this.lblRepeatConditionValue.Name = "lblRepeatConditionValue";
+            this.lblRepeatConditionValue.Size = new System.Drawing.Size(136, 15);
+            this.lblRepeatConditionValue.TabIndex = 19;
+            this.lblRepeatConditionValue.Tag = "";
+            this.lblRepeatConditionValue.Text = "[Repeat condition value]";
+            // 
+            // lblRepeatConditionType
+            // 
+            this.lblRepeatConditionType.AutoSize = true;
+            this.lblRepeatConditionType.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblRepeatConditionType.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblRepeatConditionType.Location = new System.Drawing.Point(9, 80);
+            this.lblRepeatConditionType.Name = "lblRepeatConditionType";
+            this.lblRepeatConditionType.Size = new System.Drawing.Size(122, 15);
+            this.lblRepeatConditionType.TabIndex = 18;
+            this.lblRepeatConditionType.Tag = "";
+            this.lblRepeatConditionType.Text = "Repeat according to...";
+            // 
+            // comboRepeatConditionType
+            // 
+            this.comboRepeatConditionType.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.comboRepeatConditionType.FormattingEnabled = true;
+            this.comboRepeatConditionType.Items.AddRange(new object[] {
+            "Time",
+            "Loops"});
+            this.comboRepeatConditionType.Location = new System.Drawing.Point(155, 76);
+            this.comboRepeatConditionType.Name = "comboRepeatConditionType";
+            this.comboRepeatConditionType.Size = new System.Drawing.Size(66, 23);
+            this.comboRepeatConditionType.TabIndex = 17;
+            this.comboRepeatConditionType.SelectedValueChanged += new System.EventHandler(this.comboRepeatConditionType_SelectedValueChanged);
+            // 
+            // lblConfigAvgReadTime
+            // 
+            this.lblConfigAvgReadTime.AutoSize = true;
+            this.lblConfigAvgReadTime.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblConfigAvgReadTime.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblConfigAvgReadTime.Location = new System.Drawing.Point(9, 34);
+            this.lblConfigAvgReadTime.Name = "lblConfigAvgReadTime";
+            this.lblConfigAvgReadTime.Size = new System.Drawing.Size(133, 15);
+            this.lblConfigAvgReadTime.TabIndex = 16;
+            this.lblConfigAvgReadTime.Tag = "";
+            this.lblConfigAvgReadTime.Text = "Avg. Visit Duration (sec)";
+            // 
+            // spinAvgReadTime
+            // 
+            this.spinAvgReadTime.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.spinAvgReadTime.Location = new System.Drawing.Point(155, 30);
+            this.spinAvgReadTime.Maximum = new decimal(new int[] {
+            300,
+            0,
+            0,
+            0});
+            this.spinAvgReadTime.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.spinAvgReadTime.Name = "spinAvgReadTime";
+            this.spinAvgReadTime.Size = new System.Drawing.Size(66, 23);
+            this.spinAvgReadTime.TabIndex = 0;
+            this.spinAvgReadTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.spinAvgReadTime.Value = new decimal(new int[] {
+            60,
+            0,
+            0,
+            0});
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.label1.Location = new System.Drawing.Point(12, 430);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(77, 15);
+            this.label1.TabIndex = 17;
+            this.label1.Tag = "Total loops: ";
+            this.label1.Text = "Total loops: 0";
+            // 
+            // grpConsole
+            // 
+            this.grpConsole.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.grpConsole.Controls.Add(this.txtLogger);
+            this.grpConsole.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.grpConsole.Location = new System.Drawing.Point(12, 456);
+            this.grpConsole.Name = "grpConsole";
+            this.grpConsole.Size = new System.Drawing.Size(860, 148);
+            this.grpConsole.TabIndex = 18;
+            this.grpConsole.TabStop = false;
+            this.grpConsole.Text = "Log";
+            // 
+            // grpBrowser
+            // 
+            this.grpBrowser.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.grpBrowser.Controls.Add(this.webBrowser);
+            this.grpBrowser.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.grpBrowser.Location = new System.Drawing.Point(251, 12);
+            this.grpBrowser.Name = "grpBrowser";
+            this.grpBrowser.Size = new System.Drawing.Size(621, 446);
+            this.grpBrowser.TabIndex = 19;
+            this.grpBrowser.TabStop = false;
+            this.grpBrowser.Text = "Browser (fake)";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(922, 611);
+            this.ClientSize = new System.Drawing.Size(884, 616);
+            this.Controls.Add(this.grpBrowser);
+            this.Controls.Add(this.grpConsole);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.btnActionBrowser);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.picLoading);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.lblLogger);
-            this.Controls.Add(this.txtLogger);
             this.Controls.Add(this.lblTotalCalls);
             this.Controls.Add(this.grpConfigs);
-            this.Controls.Add(this.btnActionBrowser);
-            this.Controls.Add(this.webBrowser);
+            this.MinimumSize = new System.Drawing.Size(16, 655);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.grpConfigs.ResumeLayout(false);
             this.grpConfigs.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLoading)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.spinRepeatConditionValue)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spinAvgReadTime)).EndInit();
+            this.grpConsole.ResumeLayout(false);
+            this.grpConsole.PerformLayout();
+            this.grpBrowser.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -263,12 +410,20 @@
         private System.Windows.Forms.CheckBox chkConfigSimulateBrowser;
         private System.Windows.Forms.Label lblTotalCalls;
         private System.Windows.Forms.TextBox txtLogger;
-        private System.Windows.Forms.Label lblLogger;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.Button btnFileUrls;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnFileProxies;
         private System.Windows.Forms.PictureBox picLoading;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblConfigAvgReadTime;
+        private System.Windows.Forms.NumericUpDown spinAvgReadTime;
+        private System.Windows.Forms.GroupBox grpConsole;
+        private System.Windows.Forms.GroupBox grpBrowser;
+        private System.Windows.Forms.NumericUpDown spinRepeatConditionValue;
+        private System.Windows.Forms.Label lblRepeatConditionValue;
+        private System.Windows.Forms.Label lblRepeatConditionType;
+        private System.Windows.Forms.ComboBox comboRepeatConditionType;
     }
 }
 
