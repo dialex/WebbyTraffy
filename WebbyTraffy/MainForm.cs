@@ -16,7 +16,7 @@ namespace WebbyTraffy
         public static Browser[] BrowserChoices = { Browser.CHROME, Browser.SAFARI, Browser.FIREFOX, Browser.IEXPLORER };
 
         #endregion
-        #region Configs
+        #region Constants
 
         private static readonly char LINE_THIN_CHAR = '-';
         private static readonly char LINE_STRONG_CHAR = '#';
@@ -24,6 +24,11 @@ namespace WebbyTraffy
         private static readonly string LINE_STRONG = new string(LINE_STRONG_CHAR, 60);
         private static readonly string WHITESPACE_S = new string(' ', 2);
         private static readonly string WHITESPACE_M = new string(' ', 4);
+
+        #endregion
+        #region Configs
+
+        private static readonly int VISIT_TIME_MINVALID = 10;  //seconds
 
         private int TotalVisits;
         private int TotalLoops;
@@ -66,6 +71,8 @@ namespace WebbyTraffy
 
         private void btnActionBrowser_Click(object sender, EventArgs e)
         {
+            if (ValidateConfigs() == false) return;
+
             try
             {
                 picLoading.Visible = true;
@@ -96,10 +103,21 @@ namespace WebbyTraffy
             }
         }
 
-        #region Events
+        #region Validations
+
+        private bool ValidateConfigs()
+        {
+            //if (int.TryParse(spinAvgReadTime.Value)
+            //{
+            //    ShowInfoMsg("Please make sure your configurations are correct.");
+            //    spinAvgReadTime.Focus();
+            //}
+
+            return true;
+        }
 
         #endregion
-
+        
         #region Buttons
 
         private void btnFileUrls_Click(object sender, EventArgs e)
@@ -213,16 +231,32 @@ namespace WebbyTraffy
 
         private void SimulateReading()
         {
-            Log("Reading...", false);
+            int minReadTime = VISIT_TIME_MINVALID;
+            int maxReadTime = (int)Math.Floor(spinAvgReadTime.Value * 1.6M);
+            int readTime = new Random(DateTime.Now.Millisecond).Next(minReadTime, maxReadTime);
+
+            Log("Reading", false);
             Stopwatch watch = Stopwatch.StartNew();
 
-            Thread.Sleep(5000);
-            //while ()
-            //{
-            //    Application.DoEvents();
-            //}
-            //Log(WHITESPACE_S + "hum", false);
-            //Log(WHITESPACE_S + "...", false);
+            //watch.ElapsedTicks
+
+            while (true)
+            {
+                TimeSpan passedTime = watch.Elapsed;
+
+                if (passedTime.TotalSeconds > readTime)
+                    break;
+                else if ((passedTime.Milliseconds % 1000) == 0)
+                {
+                    bool simulateScrolling = (new Random().Next(0, 2) == 1) ? true : false;
+                    if (simulateScrolling)
+                    {
+                        //TODO: do scrolling
+                        Log(".", false);
+                    }
+                }
+                Application.DoEvents();
+            }
 
             watch.Stop();
             Log(string.Format(" done{0}({1}s)", WHITESPACE_M, Math.Truncate(watch.Elapsed.TotalSeconds)), true);
