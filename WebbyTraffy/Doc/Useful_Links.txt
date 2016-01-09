@@ -9,10 +9,6 @@ http://www.codeproject.com/Questions/717959/Using-a-proxy-with-the-WebBrowser-Ob
 proxy por país:
 http://www.xroxy.com/proxylist.htm
 
-Alterar Header para:
-- diff SO
-http://stackoverflow.com/a/228267
-
 
 Ficheiro com lista de proxies a usar: COUNTRY_CODE|IP|PORT
 Proxies.txt

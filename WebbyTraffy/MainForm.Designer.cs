@@ -35,7 +35,6 @@
             this.grpConfigs = new System.Windows.Forms.GroupBox();
             this.btnFileProxies = new System.Windows.Forms.Button();
             this.btnFileUrls = new System.Windows.Forms.Button();
-            this.chkConfigSimulateOpSystem = new System.Windows.Forms.CheckBox();
             this.chkConfigSimulateCountries = new System.Windows.Forms.CheckBox();
             this.chkConfigSimulateBrowser = new System.Windows.Forms.CheckBox();
             this.lblTotalVisits = new System.Windows.Forms.Label();
@@ -67,7 +66,7 @@
             this.lblTotalUrlsToVisit.AutoSize = true;
             this.lblTotalUrlsToVisit.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblTotalUrlsToVisit.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblTotalUrlsToVisit.Location = new System.Drawing.Point(9, 31);
+            this.lblTotalUrlsToVisit.Location = new System.Drawing.Point(6, 31);
             this.lblTotalUrlsToVisit.Name = "lblTotalUrlsToVisit";
             this.lblTotalUrlsToVisit.Size = new System.Drawing.Size(110, 15);
             this.lblTotalUrlsToVisit.TabIndex = 3;
@@ -92,10 +91,10 @@
             this.btnAction.Font = new System.Drawing.Font("Segoe UI Light", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAction.Image = ((System.Drawing.Image)(resources.GetObject("btnAction.Image")));
             this.btnAction.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAction.Location = new System.Drawing.Point(12, 358);
+            this.btnAction.Location = new System.Drawing.Point(12, 350);
             this.btnAction.Name = "btnAction";
             this.btnAction.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            this.btnAction.Size = new System.Drawing.Size(233, 42);
+            this.btnAction.Size = new System.Drawing.Size(236, 42);
             this.btnAction.TabIndex = 6;
             this.btnAction.Text = "START!";
             this.btnAction.UseVisualStyleBackColor = true;
@@ -105,14 +104,13 @@
             // 
             this.grpConfigs.Controls.Add(this.btnFileProxies);
             this.grpConfigs.Controls.Add(this.btnFileUrls);
-            this.grpConfigs.Controls.Add(this.chkConfigSimulateOpSystem);
             this.grpConfigs.Controls.Add(this.chkConfigSimulateCountries);
             this.grpConfigs.Controls.Add(this.chkConfigSimulateBrowser);
             this.grpConfigs.Controls.Add(this.lblTotalUrlsToVisit);
             this.grpConfigs.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.grpConfigs.Location = new System.Drawing.Point(12, 12);
             this.grpConfigs.Name = "grpConfigs";
-            this.grpConfigs.Size = new System.Drawing.Size(233, 182);
+            this.grpConfigs.Size = new System.Drawing.Size(233, 159);
             this.grpConfigs.TabIndex = 7;
             this.grpConfigs.TabStop = false;
             this.grpConfigs.Text = "Simulation configs";
@@ -122,7 +120,7 @@
             this.btnFileProxies.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnFileProxies.Image = global::WebbyTraffy.Properties.Resources.OpenFile;
             this.btnFileProxies.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnFileProxies.Location = new System.Drawing.Point(141, 138);
+            this.btnFileProxies.Location = new System.Drawing.Point(147, 70);
             this.btnFileProxies.Name = "btnFileProxies";
             this.btnFileProxies.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
             this.btnFileProxies.Size = new System.Drawing.Size(80, 23);
@@ -136,7 +134,7 @@
             this.btnFileUrls.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnFileUrls.Image = global::WebbyTraffy.Properties.Resources.OpenFile;
             this.btnFileUrls.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnFileUrls.Location = new System.Drawing.Point(141, 27);
+            this.btnFileUrls.Location = new System.Drawing.Point(147, 27);
             this.btnFileUrls.Name = "btnFileUrls";
             this.btnFileUrls.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
             this.btnFileUrls.Size = new System.Drawing.Size(80, 23);
@@ -146,25 +144,12 @@
             this.btnFileUrls.UseVisualStyleBackColor = true;
             this.btnFileUrls.Click += new System.EventHandler(this.btnFileUrls_Click);
             // 
-            // chkConfigSimulateOpSystem
-            // 
-            this.chkConfigSimulateOpSystem.AutoSize = true;
-            this.chkConfigSimulateOpSystem.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chkConfigSimulateOpSystem.Enabled = false;
-            this.chkConfigSimulateOpSystem.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.chkConfigSimulateOpSystem.Location = new System.Drawing.Point(9, 65);
-            this.chkConfigSimulateOpSystem.Name = "chkConfigSimulateOpSystem";
-            this.chkConfigSimulateOpSystem.Size = new System.Drawing.Size(90, 19);
-            this.chkConfigSimulateOpSystem.TabIndex = 2;
-            this.chkConfigSimulateOpSystem.Text = "Simulate OS";
-            this.chkConfigSimulateOpSystem.UseVisualStyleBackColor = true;
-            // 
             // chkConfigSimulateCountries
             // 
             this.chkConfigSimulateCountries.AutoSize = true;
             this.chkConfigSimulateCountries.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.chkConfigSimulateCountries.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.chkConfigSimulateCountries.Location = new System.Drawing.Point(9, 141);
+            this.chkConfigSimulateCountries.Location = new System.Drawing.Point(6, 74);
             this.chkConfigSimulateCountries.Name = "chkConfigSimulateCountries";
             this.chkConfigSimulateCountries.Size = new System.Drawing.Size(124, 19);
             this.chkConfigSimulateCountries.TabIndex = 1;
@@ -176,7 +161,7 @@
             this.chkConfigSimulateBrowser.AutoSize = true;
             this.chkConfigSimulateBrowser.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.chkConfigSimulateBrowser.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.chkConfigSimulateBrowser.Location = new System.Drawing.Point(9, 103);
+            this.chkConfigSimulateBrowser.Location = new System.Drawing.Point(6, 121);
             this.chkConfigSimulateBrowser.Name = "chkConfigSimulateBrowser";
             this.chkConfigSimulateBrowser.Size = new System.Drawing.Size(122, 19);
             this.chkConfigSimulateBrowser.TabIndex = 0;
@@ -187,7 +172,7 @@
             // 
             this.lblTotalVisits.AutoSize = true;
             this.lblTotalVisits.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblTotalVisits.Location = new System.Drawing.Point(13, 430);
+            this.lblTotalVisits.Location = new System.Drawing.Point(13, 422);
             this.lblTotalVisits.Name = "lblTotalVisits";
             this.lblTotalVisits.Size = new System.Drawing.Size(74, 15);
             this.lblTotalVisits.TabIndex = 8;
@@ -215,7 +200,7 @@
             // picLoading
             // 
             this.picLoading.Image = global::WebbyTraffy.Properties.Resources.LoadingAnimation;
-            this.picLoading.Location = new System.Drawing.Point(217, 406);
+            this.picLoading.Location = new System.Drawing.Point(220, 398);
             this.picLoading.Name = "picLoading";
             this.picLoading.Size = new System.Drawing.Size(28, 42);
             this.picLoading.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -232,9 +217,9 @@
             this.groupBox1.Controls.Add(this.lblConfigAvgReadTime);
             this.groupBox1.Controls.Add(this.spinAvgReadTime);
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.groupBox1.Location = new System.Drawing.Point(12, 200);
+            this.groupBox1.Location = new System.Drawing.Point(12, 177);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(233, 152);
+            this.groupBox1.Size = new System.Drawing.Size(236, 152);
             this.groupBox1.TabIndex = 16;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Traffic configs";
@@ -242,7 +227,7 @@
             // spinNumberLoops
             // 
             this.spinNumberLoops.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.spinNumberLoops.Location = new System.Drawing.Point(163, 26);
+            this.spinNumberLoops.Location = new System.Drawing.Point(169, 26);
             this.spinNumberLoops.Maximum = new decimal(new int[] {
             999999,
             0,
@@ -261,7 +246,7 @@
             // spinLoopDuration
             // 
             this.spinLoopDuration.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.spinLoopDuration.Location = new System.Drawing.Point(163, 72);
+            this.spinLoopDuration.Location = new System.Drawing.Point(169, 69);
             this.spinLoopDuration.Maximum = new decimal(new int[] {
             1440,
             0,
@@ -287,7 +272,7 @@
             this.label2.AutoSize = true;
             this.label2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.label2.Location = new System.Drawing.Point(9, 76);
+            this.label2.Location = new System.Drawing.Point(6, 73);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(128, 15);
             this.label2.TabIndex = 19;
@@ -299,7 +284,7 @@
             this.label1.AutoSize = true;
             this.label1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.label1.Location = new System.Drawing.Point(9, 30);
+            this.label1.Location = new System.Drawing.Point(6, 30);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(146, 15);
             this.label1.TabIndex = 18;
@@ -311,7 +296,7 @@
             this.lblConfigAvgReadTime.AutoSize = true;
             this.lblConfigAvgReadTime.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblConfigAvgReadTime.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblConfigAvgReadTime.Location = new System.Drawing.Point(9, 123);
+            this.lblConfigAvgReadTime.Location = new System.Drawing.Point(6, 117);
             this.lblConfigAvgReadTime.Name = "lblConfigAvgReadTime";
             this.lblConfigAvgReadTime.Size = new System.Drawing.Size(105, 15);
             this.lblConfigAvgReadTime.TabIndex = 16;
@@ -321,7 +306,7 @@
             // spinAvgReadTime
             // 
             this.spinAvgReadTime.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.spinAvgReadTime.Location = new System.Drawing.Point(163, 119);
+            this.spinAvgReadTime.Location = new System.Drawing.Point(169, 113);
             this.spinAvgReadTime.Maximum = new decimal(new int[] {
             300,
             0,
@@ -346,7 +331,7 @@
             // 
             this.lblTotalLoops.AutoSize = true;
             this.lblTotalLoops.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblTotalLoops.Location = new System.Drawing.Point(13, 409);
+            this.lblTotalLoops.Location = new System.Drawing.Point(13, 401);
             this.lblTotalLoops.Name = "lblTotalLoops";
             this.lblTotalLoops.Size = new System.Drawing.Size(126, 15);
             this.lblTotalLoops.TabIndex = 17;
@@ -417,7 +402,6 @@
         private System.Windows.Forms.WebBrowser webBrowser;
         private System.Windows.Forms.Button btnAction;
         private System.Windows.Forms.GroupBox grpConfigs;
-        private System.Windows.Forms.CheckBox chkConfigSimulateOpSystem;
         private System.Windows.Forms.CheckBox chkConfigSimulateCountries;
         private System.Windows.Forms.CheckBox chkConfigSimulateBrowser;
         private System.Windows.Forms.Label lblTotalVisits;

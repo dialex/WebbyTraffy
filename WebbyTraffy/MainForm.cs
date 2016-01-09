@@ -13,7 +13,7 @@ namespace WebbyTraffy
         #region Data
 
         public enum State { Running, Stopped };
-        public static Browser[] BrowserChoices = { Browser.CHROME, Browser.SAFARI, Browser.FIREFOX, Browser.IEXPLORER };
+        public static UserAgent[] BrowserChoices = { UserAgent.CHROME, UserAgent.SAFARI, UserAgent.FIREFOX, UserAgent.IEXPLORER };
 
         #endregion
         #region Constants
@@ -272,7 +272,7 @@ namespace WebbyTraffy
 
         void SimulateBrowsing(string url)
         {
-            Browser browserHeader = GetRandomBrowser();
+            UserAgent browserHeader = GetRandomBrowser();
             //Proxy countryProxy = GetRandomProxy();
             OpenUrl(url, browserHeader);
             SimulateReading();
@@ -339,7 +339,7 @@ namespace WebbyTraffy
             Log(string.Format(" done{0}({1}s)", WHITESPACE_M, Math.Truncate(watch.Elapsed.TotalSeconds)), true);
         }
         
-        private Browser GetRandomBrowser()
+        private UserAgent GetRandomBrowser()
         {
             if (chkConfigSimulateBrowser.Checked)
             {
@@ -413,7 +413,7 @@ namespace WebbyTraffy
             }
         }
 
-        private void OpenUrl(string url, Browser mockBrowser = null)
+        private void OpenUrl(string url, UserAgent mockBrowser = null)
         {
             Log("Browsing: " + url);
             if (mockBrowser == null)
@@ -423,7 +423,7 @@ namespace WebbyTraffy
             else
             {
                 Log(WHITESPACE_S + "UserAgent: " + mockBrowser.Name);
-                webBrowser.Navigate(url, "_self", null, mockBrowser.UserAgent + Environment.NewLine);
+                webBrowser.Navigate(url, "_self", null, mockBrowser.UserAgentStr + Environment.NewLine);
             }
 
             Log("Downloading...", false);
@@ -475,24 +475,24 @@ namespace WebbyTraffy
     /// <summary>
     /// Contains UserAgent strings. Check http://www.useragentstring.com/pages/All/.
     /// </summary>
-    public class Browser
+    public class UserAgent
     {
         public string Name;
-        public string UserAgent;
+        public string UserAgentStr;
 
-        public Browser(string name, string headerUserAgent)
+        public UserAgent(string name, string headerUserAgent)
         {
             Name = name;
-            UserAgent = headerUserAgent;
+            UserAgentStr = headerUserAgent;
         }
 
-        public static Browser CHROME { get { return new Browser("Chrome", "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36"); } }
-        public static Browser SAFARI { get { return new Browser("Safari", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.75.14 (KHTML, like Gecko) Version/7.0.3 Safari/7046A194A"); } }
-        public static Browser FIREFOX { get { return new Browser("Firefox", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.1"); } }
-        public static Browser IEXPLORER { get { return new Browser("IE", "Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; AS; rv:11.0) like Gecko"); } }
-        public static Browser SEAMONKEY { get { return new Browser("SeaMonkey", "Mozilla/5.0 (Windows NT 5.2; RW; rv:7.0a1) Gecko/20091211 SeaMonkey/9.23a1pre"); } }
-        public static Browser KONQUEROR { get { return new Browser("Konqueror", "Mozilla/5.0 (X11; Linux) KHTML/4.9.1 (like Gecko) Konqueror/4.9"); } }
-        public static Browser OPERA { get { return new Browser("Opera", "Opera/9.80 (X11; Linux i686; Ubuntu/14.10) Presto/2.12.388 Version/12.16"); } }
+        public static UserAgent CHROME { get { return new UserAgent("Chrome", "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36"); } }
+        public static UserAgent SAFARI { get { return new UserAgent("Safari", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.75.14 (KHTML, like Gecko) Version/7.0.3 Safari/7046A194A"); } }
+        public static UserAgent FIREFOX { get { return new UserAgent("Firefox", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.1"); } }
+        public static UserAgent IEXPLORER { get { return new UserAgent("IE", "Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; AS; rv:11.0) like Gecko"); } }
+        public static UserAgent SEAMONKEY { get { return new UserAgent("SeaMonkey", "Mozilla/5.0 (Windows NT 5.2; RW; rv:7.0a1) Gecko/20091211 SeaMonkey/9.23a1pre"); } }
+        public static UserAgent KONQUEROR { get { return new UserAgent("Konqueror", "Mozilla/5.0 (X11; Linux) KHTML/4.9.1 (like Gecko) Konqueror/4.9"); } }
+        public static UserAgent OPERA { get { return new UserAgent("Opera", "Opera/9.80 (X11; Linux i686; Ubuntu/14.10) Presto/2.12.388 Version/12.16"); } }
     }
 
     #endregion
