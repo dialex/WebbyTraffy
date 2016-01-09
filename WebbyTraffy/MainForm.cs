@@ -358,7 +358,7 @@ namespace WebbyTraffy
         {
             // Adfly pages
             HtmlElement pageButton = webBrowser.Document.GetElementById("abC");
-            pageButton.InvokeMember("click");
+            if (pageButton != null) pageButton.InvokeMember("click");
 
             alertsDismissed = true;
         }
