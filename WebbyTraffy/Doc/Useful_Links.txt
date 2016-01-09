@@ -14,6 +14,5 @@ Ficheiro com lista de proxies a usar: COUNTRY_CODE|IP|PORT
 Proxies.txt
 
 
-Simulate Scrolling
 Simulate Proxies
 Usar ultimas definicoes (gravar/ler do app.config)

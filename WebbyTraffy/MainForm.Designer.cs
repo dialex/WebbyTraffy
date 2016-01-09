@@ -381,6 +381,7 @@
             this.MinimumSize = new System.Drawing.Size(16, 655);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.grpConfigs.ResumeLayout(false);
             this.grpConfigs.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLoading)).EndInit();

@@ -52,26 +52,12 @@ namespace WebbyTraffy
             _internalState = State.Stopped;
             _urlsToVisit = new List<Uri>();
 
-            // Import default configs
-            try
-            {
-                Log(WHITESPACE_S + "Attempting to load \"Urls.txt\" file.");
-                if (File.Exists("Urls.txt"))
-                    LoadUrls(File.Open("Urls.txt", FileMode.Open));
-
-                //Log("Attempting to load \"Proxies.txt\" file.");
-                //if (File.Exists("Urls.txt"))
-                //    LoadUrls(File.Open("Urls.txt", FileMode.Open));
-            }
-            catch (Exception error)
-            {
-                ShowAndLogErrorMsg("Something went wrong while reading the default configurations.", error.Message);
-            }
-
             // Set default configs
             chkConfigSimulateBrowser.Checked = true;
             chkConfigSimulateCountries.Checked = true;
             spinAvgReadTime.Minimum = VISIT_TIME_MINVALID;
+
+            LoadLastConfigs();
         }
 
         private void StartRunning()
@@ -144,6 +130,21 @@ namespace WebbyTraffy
 
         #endregion
 
+        #region Events
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            while (_internalState == State.Running)
+            {
+                SignalToStopRunning();
+                Application.DoEvents();
+            }
+
+            SaveConfigs();
+            Log("Shutting down...");
+        }
+
+        #endregion
         #region Buttons
 
         private void btnActionBrowser_Click(object sender, EventArgs e)
@@ -390,8 +391,42 @@ namespace WebbyTraffy
             _totalLoops = _totalVisits = 0;
         }
 
+        // Configs
+
+        private void LoadLastConfigs()
+        {
+            // Import last used configs
+            try
+            {
+                Log(WHITESPACE_S + "Attempting to load \"Urls.txt\" file.");
+                if (File.Exists("Urls.txt"))
+                    LoadUrls(File.Open("Urls.txt", FileMode.Open));
+
+                //Log("Attempting to load \"Proxies.txt\" file.");
+                //if (File.Exists("Urls.txt"))
+                //    LoadUrls(File.Open("Urls.txt", FileMode.Open));
+            }
+            catch (Exception error)
+            {
+                ShowAndLogErrorMsg("Something went wrong while reading the default configurations.", error.Message);
+            }
+        }
+
+        private void SaveConfigs()
+        {
+            // Saving current configs persistenly
+            try
+            {
+                throw new NotImplementedException("TODO");
+            }
+            catch (Exception error)
+            {
+                ShowAndLogErrorMsg("Something went wrong while saving your current configurations.", error.Message);
+            }
+        }
+
         // URLs
-        
+
         private void LoadUrls(Stream file)
         {
             int numValidUrls = 0;
@@ -462,6 +497,9 @@ namespace WebbyTraffy
             Stopwatch watch = Stopwatch.StartNew();
             while (webBrowser.ReadyState != WebBrowserReadyState.Complete)
             {
+                // If a stop signal was sent meanwhile, it's time to stop
+                if (_internalState == State.Stopped) { RefreshActionButton(); return; }
+
                 Application.DoEvents();
             }
             watch.Stop();
@@ -526,21 +564,6 @@ namespace WebbyTraffy
         public static UserAgent KONQUEROR { get { return new UserAgent("Konqueror", "Mozilla/5.0 (X11; Linux) KHTML/4.9.1 (like Gecko) Konqueror/4.9"); } }
         public static UserAgent OPERA { get { return new UserAgent("Opera", "Opera/9.80 (X11; Linux i686; Ubuntu/14.10) Presto/2.12.388 Version/12.16"); } }
     }
-
-    public class KeyHandle
-    {
-        private static Int32 WM_KEYDOWN = 0x100;
-        private static Int32 WM_KEYUP = 0x101;
-
-        [return: System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.Bool)]
-        [System.Runtime.InteropServices.DllImport("user32.dll", SetLastError = true)]
-        static extern bool PostMessage(IntPtr hWnd, int Msg, Keys wParam, int lParam);
-
-        public static void SendKey(IntPtr hWnd, Keys key)
-        {
-            PostMessage(hWnd, WM_KEYDOWN, key, 0);
-        }
-    }
-
+    
     #endregion
 }
