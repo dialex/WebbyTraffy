@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Text;
-using System.Threading;
 using System.Windows.Forms;
 
 namespace WebbyTraffy
@@ -74,20 +73,6 @@ namespace WebbyTraffy
             spinAvgReadTime.Minimum = VISIT_TIME_MINVALID;
         }
 
-        private void btnActionBrowser_Click(object sender, EventArgs e)
-        {
-            switch(_internalState)
-            {
-                case State.Stopped:
-                    if (ValidateConfigs() == false) return;
-                    StartRunning();
-                    break;
-                case State.Running:
-                    StopRunning();
-                    break;
-            }
-        }
-
         private void StartRunning()
         {
             _internalState = State.Running;
@@ -126,7 +111,7 @@ namespace WebbyTraffy
             }
         }
 
-        private void StopRunning()
+        private void SignalToStopRunning()
         {
             _internalState = State.Stopped;
             btnAction.Text = "Stopping...";
@@ -146,8 +131,22 @@ namespace WebbyTraffy
         }
 
         #endregion
-        
+
         #region Buttons
+
+        private void btnActionBrowser_Click(object sender, EventArgs e)
+        {
+            switch (_internalState)
+            {
+                case State.Stopped:
+                    if (ValidateConfigs() == false) return;
+                    StartRunning();
+                    break;
+                case State.Running:
+                    SignalToStopRunning();
+                    break;
+            }
+        }
 
         private void btnFileUrls_Click(object sender, EventArgs e)
         {
@@ -434,6 +433,9 @@ namespace WebbyTraffy
 
     #region DomainModel classes
 
+    /// <summary>
+    /// Contains UserAgent strings. Check http://www.useragentstring.com/pages/All/.
+    /// </summary>
     public class Browser
     {
         public string Name;

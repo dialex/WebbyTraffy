@@ -96,6 +96,7 @@
     <None Include="Resources\Stop.png" />
     <None Include="Resources\Play.png" />
     <None Include="Resources\AppIco.ico" />
+    <Content Include="Resources\AppIco.png" />
     <Content Include="Urls.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

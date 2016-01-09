@@ -1,6 +1,7 @@
 ﻿mudar de webbrowser
 http://www.codeproject.com/Tips/825526/Csharp-WebBrowser-vs-Gecko-vs-Awesomium-vs-OpenWeb
 
+
 usar proxy em C#:
 http://stackoverflow.com/questions/817548/c-sharp-webclient-and-proxy-server
 http://www.codeproject.com/Questions/717959/Using-a-proxy-with-the-WebBrowser-Object
@@ -11,21 +12,7 @@ http://www.xroxy.com/proxylist.htm
 Alterar Header para:
 - diff SO
 http://stackoverflow.com/a/228267
-- diff Browser
-http://stackoverflow.com/a/11841680
-http://www.useragentstring.com/pages/All/
 
-
-A cada chamada aguarda intervalo random de tempo (1 a 30 min)
-
-Configs:
-- Repeat ON/OFF
-- Traffic level (Low, Medium, High)
-- Simulate browsers
-- Simulate operating systems
-- Simulate countries (proxies)
-
-Consola que vai mostrando o resultado das chamadas (não pode bloquear, usar thread para atualizar)
 
 Ficheiro com lista de proxies a usar: COUNTRY_CODE|IP|PORT
 Proxies.txt
