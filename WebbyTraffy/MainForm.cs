@@ -280,6 +280,7 @@ namespace WebbyTraffy
 
         private void SimulateReading()
         {
+            bool alertsDismissed = false;
             int minReadTime = VISIT_TIME_MINVALID;
             int maxReadTime = (int)Math.Floor(spinAvgReadTime.Value * 1.6M);
             int readTime = new Random(DateTime.Now.Millisecond).Next(minReadTime, maxReadTime);
@@ -299,6 +300,7 @@ namespace WebbyTraffy
                     if (simulateScrolling)
                     {
                         //TODO: do scrolling
+                        DismissAlertBoxes(out alertsDismissed);
                         Log(".", false);
                     }
                 }
@@ -347,6 +349,18 @@ namespace WebbyTraffy
                 return BrowserChoices[randIndex];
             }
             else return null;
+        }
+
+        /// <summary>
+        /// Find alert boxes and simulate a press on "OK" or "Continue".
+        /// </summary>
+        private void DismissAlertBoxes(out bool alertsDismissed)
+        {
+            // Adfly pages
+            HtmlElement pageButton = webBrowser.Document.GetElementById("abC");
+            pageButton.InvokeMember("click");
+
+            alertsDismissed = true;
         }
 
         #endregion
