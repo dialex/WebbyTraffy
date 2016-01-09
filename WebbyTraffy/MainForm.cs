@@ -130,6 +130,16 @@ namespace WebbyTraffy
             return true;
         }
 
+        private bool IsEmptyOrComment(string line)
+        {
+            if (string.IsNullOrEmpty(line))
+                return true;
+            else if (line.StartsWith("//") || line.StartsWith("#"))
+                return true;
+            else
+                return false;
+        }
+
         #endregion
 
         #region Buttons
@@ -340,6 +350,9 @@ namespace WebbyTraffy
                 {
                     while ((line = fileReader.ReadLine()) != null)
                     {
+                        line = line.Trim();
+                        if (IsEmptyOrComment(line)) continue;
+
                         Uri validatedUrl;
                         bool isValidUrl =
                             Uri.TryCreate(line, UriKind.Absolute, out validatedUrl) &&

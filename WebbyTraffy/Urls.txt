@@ -1,5 +1,7 @@
-﻿http://www.diogonunes.com/blog/too-weird-to-live-too-unique-to-die/
+﻿// Blog
+http://www.diogonunes.com/blog/too-weird-to-live-too-unique-to-die/
 
+# Adfly
 http://adf.ly/10475475/gmod-textures
 http://adf.ly/10475475/gmod-maps
 http://adf.ly/10475475/livro-fantasia-epub
