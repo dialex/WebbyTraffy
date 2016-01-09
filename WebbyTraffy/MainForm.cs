@@ -13,6 +13,7 @@ namespace WebbyTraffy
     {
         #region Data
 
+        public enum State { Running, Stopped };
         public static Browser[] BrowserChoices = { Browser.CHROME, Browser.SAFARI, Browser.FIREFOX, Browser.IEXPLORER };
 
         #endregion
@@ -30,9 +31,10 @@ namespace WebbyTraffy
 
         private static readonly int VISIT_TIME_MINVALID = 10;  //seconds
 
-        private int TotalVisits;
-        private int TotalLoops;
-        private List<Uri> UrlsToVisit;
+        private State _internalState;
+        private int _totalVisits;
+        private int _totalLoops;
+        private List<Uri> _urlsToVisit;
 
         #endregion
 
@@ -46,8 +48,9 @@ namespace WebbyTraffy
         private void Init()
         {
             Log("Initializing...");
-            UrlsToVisit = new List<Uri>();
             ResetCounters();
+            _internalState = State.Stopped;
+            _urlsToVisit = new List<Uri>();
 
             // Import default configs
             try
@@ -73,20 +76,38 @@ namespace WebbyTraffy
 
         private void btnActionBrowser_Click(object sender, EventArgs e)
         {
-            if (ValidateConfigs() == false) return;
+            switch(_internalState)
+            {
+                case State.Stopped:
+                    if (ValidateConfigs() == false) return;
+                    StartRunning();
+                    break;
+                case State.Running:
+                    StopRunning();
+                    break;
+            }
+        }
+
+        private void StartRunning()
+        {
+            _internalState = State.Running;
+            RefreshActionButton();
 
             try
             {
                 picLoading.Visible = true;
                 Log(LINE_STRONG);
 
-                while (TotalLoops < spinNumberLoops.Value)
+                while (_totalLoops < spinNumberLoops.Value)
                 {
                     int urlIndex = 0;
-                    foreach (Uri url in UrlsToVisit)
+                    foreach (Uri url in _urlsToVisit)
                     {
+                        // If a stop signal was sent meanwhile, it's time to stop
+                        if (_internalState == State.Stopped) { RefreshActionButton(); return; }
+
                         Log(string.Format("{0} Action: {1} - Url {2} is being visited by the {3} time.",
-                            new string(LINE_STRONG_CHAR, 5), TotalVisits + 1, ++urlIndex, DisplayOrdinal(TotalLoops + 1)));
+                            new string(LINE_STRONG_CHAR, 5), _totalVisits + 1, ++urlIndex, DisplayOrdinal(_totalLoops + 1)));
                         SimulateBrowsing(url.ToString());
                         RefreshTotalVisits(1);
                         WaitBeforeNext();
@@ -103,6 +124,12 @@ namespace WebbyTraffy
                 picLoading.Visible = false;
                 Log(LINE_STRONG);
             }
+        }
+
+        private void StopRunning()
+        {
+            _internalState = State.Stopped;
+            btnAction.Text = "Stopping...";
         }
 
         #region Validations
@@ -153,27 +180,42 @@ namespace WebbyTraffy
 
         #region UI
 
+        private void RefreshActionButton()
+        {
+            switch (_internalState)
+            {
+                case State.Stopped:
+                    btnAction.Text = "START!";
+                    btnAction.Image = Properties.Resources.Play;
+                    break;
+                case State.Running:
+                    btnAction.Text = "Stop";
+                    btnAction.Image = Properties.Resources.Stop;
+                    break;
+            }
+        }
+
         private void RefreshTotalUrls()
         {
-            lblTotalUrlsToVisit.Text = lblTotalUrlsToVisit.Tag.ToString() + UrlsToVisit.Count;
+            lblTotalUrlsToVisit.Text = lblTotalUrlsToVisit.Tag.ToString() + _urlsToVisit.Count;
         }
 
         private void RefreshTotalLoops(int increment)
         {
-            TotalLoops += increment;
-            lblTotalLoops.Text = lblTotalLoops.Tag.ToString() + TotalLoops.ToString();
+            _totalLoops += increment;
+            lblTotalLoops.Text = lblTotalLoops.Tag.ToString() + _totalLoops.ToString();
         }
 
         private void RefreshTotalVisits(int increment)
         {
-            TotalVisits += increment;
-            lblTotalVisits.Text = lblTotalVisits.Tag.ToString() + TotalVisits.ToString();
+            _totalVisits += increment;
+            lblTotalVisits.Text = lblTotalVisits.Tag.ToString() + _totalVisits.ToString();
         }
 
         private void DisplayUrlsToCall()
         {
             StringBuilder str = new StringBuilder();
-            foreach (Uri url in UrlsToVisit)
+            foreach (Uri url in _urlsToVisit)
             {
                 str.AppendLine(url.ToString());
             }
@@ -240,9 +282,7 @@ namespace WebbyTraffy
             Log("Reading", false);
             Stopwatch watch = Stopwatch.StartNew();
 
-            //watch.ElapsedTicks
-
-            while (true)
+            while (_internalState == State.Running)
             {
                 TimeSpan passedTime = watch.Elapsed;
 
@@ -280,7 +320,7 @@ namespace WebbyTraffy
 
         private void ResetCounters()
         {
-            TotalLoops = TotalVisits = 0;
+            _totalLoops = _totalVisits = 0;
         }
 
         // URLs
@@ -293,7 +333,7 @@ namespace WebbyTraffy
 
             try
             {
-                UrlsToVisit.Clear();
+                _urlsToVisit.Clear();
                 Log("Cleared URL calling list.");
 
                 Log("Loading URLs...");
@@ -308,7 +348,7 @@ namespace WebbyTraffy
 
                         if (isValidUrl)
                         {
-                            UrlsToVisit.Add(validatedUrl);
+                            _urlsToVisit.Add(validatedUrl);
                             numValidUrls++;
                         }
                         else

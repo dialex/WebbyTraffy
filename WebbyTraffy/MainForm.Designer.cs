@@ -28,9 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.lblTotalUrlsToVisit = new System.Windows.Forms.Label();
             this.webBrowser = new System.Windows.Forms.WebBrowser();
-            this.btnActionBrowser = new System.Windows.Forms.Button();
+            this.btnAction = new System.Windows.Forms.Button();
             this.grpConfigs = new System.Windows.Forms.GroupBox();
             this.btnFileProxies = new System.Windows.Forms.Button();
             this.btnFileUrls = new System.Windows.Forms.Button();
@@ -86,19 +87,19 @@
             this.webBrowser.TabIndex = 5;
             this.webBrowser.WebBrowserShortcutsEnabled = false;
             // 
-            // btnActionBrowser
+            // btnAction
             // 
-            this.btnActionBrowser.Font = new System.Drawing.Font("Segoe UI Light", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnActionBrowser.Image = global::WebbyTraffy.Properties.Resources.Play;
-            this.btnActionBrowser.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnActionBrowser.Location = new System.Drawing.Point(12, 358);
-            this.btnActionBrowser.Name = "btnActionBrowser";
-            this.btnActionBrowser.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            this.btnActionBrowser.Size = new System.Drawing.Size(233, 42);
-            this.btnActionBrowser.TabIndex = 6;
-            this.btnActionBrowser.Text = "START!";
-            this.btnActionBrowser.UseVisualStyleBackColor = true;
-            this.btnActionBrowser.Click += new System.EventHandler(this.btnActionBrowser_Click);
+            this.btnAction.Font = new System.Drawing.Font("Segoe UI Light", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAction.Image = ((System.Drawing.Image)(resources.GetObject("btnAction.Image")));
+            this.btnAction.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAction.Location = new System.Drawing.Point(12, 358);
+            this.btnAction.Name = "btnAction";
+            this.btnAction.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            this.btnAction.Size = new System.Drawing.Size(233, 42);
+            this.btnAction.TabIndex = 6;
+            this.btnAction.Text = "START!";
+            this.btnAction.UseVisualStyleBackColor = true;
+            this.btnAction.Click += new System.EventHandler(this.btnActionBrowser_Click);
             // 
             // grpConfigs
             // 
@@ -387,7 +388,7 @@
             this.Controls.Add(this.grpBrowser);
             this.Controls.Add(this.grpConsole);
             this.Controls.Add(this.lblTotalLoops);
-            this.Controls.Add(this.btnActionBrowser);
+            this.Controls.Add(this.btnAction);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.picLoading);
             this.Controls.Add(this.lblTotalVisits);
@@ -414,7 +415,7 @@
         #endregion
         private System.Windows.Forms.Label lblTotalUrlsToVisit;
         private System.Windows.Forms.WebBrowser webBrowser;
-        private System.Windows.Forms.Button btnActionBrowser;
+        private System.Windows.Forms.Button btnAction;
         private System.Windows.Forms.GroupBox grpConfigs;
         private System.Windows.Forms.CheckBox chkConfigSimulateOpSystem;
         private System.Windows.Forms.CheckBox chkConfigSimulateCountries;
