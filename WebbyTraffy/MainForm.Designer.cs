@@ -89,11 +89,14 @@
             // btnActionBrowser
             // 
             this.btnActionBrowser.Font = new System.Drawing.Font("Segoe UI Light", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnActionBrowser.Image = global::WebbyTraffy.Properties.Resources.Play;
+            this.btnActionBrowser.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnActionBrowser.Location = new System.Drawing.Point(12, 358);
             this.btnActionBrowser.Name = "btnActionBrowser";
+            this.btnActionBrowser.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
             this.btnActionBrowser.Size = new System.Drawing.Size(233, 42);
             this.btnActionBrowser.TabIndex = 6;
-            this.btnActionBrowser.Text = "DO IT!";
+            this.btnActionBrowser.Text = "START!";
             this.btnActionBrowser.UseVisualStyleBackColor = true;
             this.btnActionBrowser.Click += new System.EventHandler(this.btnActionBrowser_Click);
             // 
