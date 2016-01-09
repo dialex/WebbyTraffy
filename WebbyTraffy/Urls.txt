@@ -1,5 +1,5 @@
 ﻿// Blog
-http://www.diogonunes.com/blog/too-weird-to-live-too-unique-to-die/
+//http://www.diogonunes.com/blog/too-weird-to-live-too-unique-to-die/
 
 # Adfly
 http://adf.ly/10475475/gmod-textures

@@ -77,6 +77,7 @@ namespace WebbyTraffy
         {
             _internalState = State.Running;
             RefreshActionButton();
+            ResetCounters();
 
             try
             {
@@ -267,7 +268,7 @@ namespace WebbyTraffy
 
         #endregion
 
-        #region Mockup methods
+        #region Simulation methods
 
         void SimulateBrowsing(string url)
         {
@@ -275,11 +276,6 @@ namespace WebbyTraffy
             //Proxy countryProxy = GetRandomProxy();
             OpenUrl(url, browserHeader);
             SimulateReading();
-        }
-
-        private void WaitBeforeNext()
-        {
-            //TODO
         }
 
         private void SimulateReading()
@@ -313,6 +309,36 @@ namespace WebbyTraffy
             Log(string.Format(" done{0}({1}s)", WHITESPACE_M, Math.Truncate(watch.Elapsed.TotalSeconds)), true);
         }
 
+        private void WaitBeforeNext()
+        {
+            int estimatedExecTime = (int)spinLoopDuration.Value * 60; // in seconds
+            int numLoops = (int)spinNumberLoops.Value;
+            int numCallsPerLoop = _urlsToVisit.Count;
+
+            int timePerLoop = estimatedExecTime / numLoops;
+            int avgTimeBetweenCalls = timePerLoop / numCallsPerLoop;
+
+            Random randGen = new Random(DateTime.Now.Millisecond);
+            int timeIrregularity = randGen.Next(1, (int)Math.Truncate(estimatedExecTime * 0.01));
+            int waitTime = new Random(DateTime.Now.Millisecond).Next(avgTimeBetweenCalls - timeIrregularity, avgTimeBetweenCalls + timeIrregularity);
+
+            Log("Waiting next visitor...", false);
+            Stopwatch watch = Stopwatch.StartNew();
+            while (_internalState == State.Running)
+            {
+                TimeSpan passedTime = watch.Elapsed;
+
+                if (passedTime.TotalSeconds > waitTime)
+                    break;
+                else if ((passedTime.Milliseconds % 1000) == 0)
+                    Log(".", false);
+
+                Application.DoEvents();
+            }
+            watch.Stop();
+            Log(string.Format(" done{0}({1}s)", WHITESPACE_M, Math.Truncate(watch.Elapsed.TotalSeconds)), true);
+        }
+        
         private Browser GetRandomBrowser()
         {
             if (chkConfigSimulateBrowser.Checked)
