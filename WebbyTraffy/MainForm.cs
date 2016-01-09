@@ -40,6 +40,7 @@ namespace WebbyTraffy
         {
             InitializeComponent();
             Init();
+            this.Icon = Properties.Resources.AppIco;
         }
 
         private void Init()
