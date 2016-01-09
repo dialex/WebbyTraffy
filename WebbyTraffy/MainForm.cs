@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Net;
 using System.Text;
@@ -299,16 +300,33 @@ namespace WebbyTraffy
                     bool simulateScrolling = (new Random().Next(0, 2) == 1) ? true : false;
                     if (simulateScrolling)
                     {
-                        //TODO: do scrolling
-                        DismissAlertBoxes(out alertsDismissed);
+                        SimulateScrolling();
                         Log(".", false);
                     }
+                    DismissAlertBoxes(out alertsDismissed);
                 }
                 Application.DoEvents();
             }
 
             watch.Stop();
             Log(string.Format(" done{0}({1}s)", WHITESPACE_M, Math.Truncate(watch.Elapsed.TotalSeconds)), true);
+        }
+
+        private void SimulateScrolling()
+        {
+            //webBrowser.Focus();
+            //SendKeys.SendWait("{PGDN}");
+            //Log("D", false);
+
+            //bool scrollDown = (new Random().Next(0, 2) == 1) ? true : false;
+            //if (scrollDown) { 
+            //    KeyHandle.SendKey(webBrowser.Handle, Keys.PageDown);
+            //    Log("D", false);
+            //}
+            //else { 
+            //    KeyHandle.SendKey(webBrowser.Handle, Keys.PageUp);
+            //    Log("U", false);
+            //}
         }
 
         private void WaitBeforeNext()
@@ -507,6 +525,21 @@ namespace WebbyTraffy
         public static UserAgent SEAMONKEY { get { return new UserAgent("SeaMonkey", "Mozilla/5.0 (Windows NT 5.2; RW; rv:7.0a1) Gecko/20091211 SeaMonkey/9.23a1pre"); } }
         public static UserAgent KONQUEROR { get { return new UserAgent("Konqueror", "Mozilla/5.0 (X11; Linux) KHTML/4.9.1 (like Gecko) Konqueror/4.9"); } }
         public static UserAgent OPERA { get { return new UserAgent("Opera", "Opera/9.80 (X11; Linux i686; Ubuntu/14.10) Presto/2.12.388 Version/12.16"); } }
+    }
+
+    public class KeyHandle
+    {
+        private static Int32 WM_KEYDOWN = 0x100;
+        private static Int32 WM_KEYUP = 0x101;
+
+        [return: System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.Bool)]
+        [System.Runtime.InteropServices.DllImport("user32.dll", SetLastError = true)]
+        static extern bool PostMessage(IntPtr hWnd, int Msg, Keys wParam, int lParam);
+
+        public static void SendKey(IntPtr hWnd, Keys key)
+        {
+            PostMessage(hWnd, WM_KEYDOWN, key, 0);
+        }
     }
 
     #endregion
