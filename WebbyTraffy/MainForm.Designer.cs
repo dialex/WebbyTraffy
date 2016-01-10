@@ -128,6 +128,7 @@
             this.btnFileProxies.Text = "Import...";
             this.btnFileProxies.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnFileProxies.UseVisualStyleBackColor = true;
+            this.btnFileProxies.Click += new System.EventHandler(this.btnFileProxies_Click);
             // 
             // btnFileUrls
             // 
@@ -182,20 +183,22 @@
             // txtLogger
             // 
             this.txtLogger.BackColor = System.Drawing.Color.Black;
+            this.txtLogger.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtLogger.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtLogger.Font = new System.Drawing.Font("Consolas", 9F);
             this.txtLogger.ForeColor = System.Drawing.Color.White;
             this.txtLogger.Location = new System.Drawing.Point(3, 19);
             this.txtLogger.Multiline = true;
             this.txtLogger.Name = "txtLogger";
+            this.txtLogger.ReadOnly = true;
             this.txtLogger.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtLogger.Size = new System.Drawing.Size(854, 126);
+            this.txtLogger.Size = new System.Drawing.Size(854, 121);
             this.txtLogger.TabIndex = 9;
             // 
             // openFileDialog
             // 
             this.openFileDialog.DereferenceLinks = false;
-            this.openFileDialog.Filter = "\"Text|*.txt|All|*.*\"";
+            this.openFileDialog.Filter = "Text|*.txt|All|*.*";
             // 
             // picLoading
             // 
@@ -344,9 +347,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.grpConsole.Controls.Add(this.txtLogger);
             this.grpConsole.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.grpConsole.Location = new System.Drawing.Point(12, 456);
+            this.grpConsole.Location = new System.Drawing.Point(12, 461);
             this.grpConsole.Name = "grpConsole";
-            this.grpConsole.Size = new System.Drawing.Size(860, 148);
+            this.grpConsole.Size = new System.Drawing.Size(860, 143);
             this.grpConsole.TabIndex = 18;
             this.grpConsole.TabStop = false;
             this.grpConsole.Text = "Output Log";

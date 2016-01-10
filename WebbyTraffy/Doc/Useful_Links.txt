@@ -1,16 +1,6 @@
 ﻿mudar de webbrowser
 http://www.codeproject.com/Tips/825526/Csharp-WebBrowser-vs-Gecko-vs-Awesomium-vs-OpenWeb
 
-
-usar proxy em C#:
-http://stackoverflow.com/questions/817548/c-sharp-webclient-and-proxy-server
-http://www.codeproject.com/Questions/717959/Using-a-proxy-with-the-WebBrowser-Object
-
 proxy por país:
-http://www.xroxy.com/proxylist.htm
-
-
-Ficheiro com lista de proxies a usar: COUNTRY_CODE|IP|PORT
-Proxies.txt
-
-Simulate Proxies
+http://proxylist.hidemyass.com/
+https://incloak.com/proxy-list

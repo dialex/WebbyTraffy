@@ -7,6 +7,7 @@ using System.IO;
 using System.Net;
 using System.Text;
 using System.Windows.Forms;
+using WebbyTraffy.Classes;
 
 namespace WebbyTraffy
 {
@@ -16,6 +17,7 @@ namespace WebbyTraffy
 
         public enum State { Running, Stopped };
         public static UserAgent[] BrowserChoices = { UserAgent.CHROME, UserAgent.SAFARI, UserAgent.FIREFOX, UserAgent.IEXPLORER };
+        public static List<Proxy> ProxyChoices;
 
         #endregion
         #region Constants
@@ -52,8 +54,10 @@ namespace WebbyTraffy
             ResetCounters();
             _internalState = State.Stopped;
             _urlsToVisit = new List<Uri>();
+            ProxyChoices = new List<Proxy>();
 
             LoadLastConfigs();
+            Log(new string(LINE_THIN_CHAR, 5) + "READY" + new string(LINE_THIN_CHAR, 5));
         }
 
         private void StartRunning()
@@ -103,12 +107,37 @@ namespace WebbyTraffy
 
         #region Simulation methods
 
+        private UserAgent GetRandomBrowser()
+        {
+            if (chkConfigSimulateBrowser.Checked)
+            {
+                int randIndex = new Random().Next(0, BrowserChoices.Length - 1);
+                return BrowserChoices[randIndex];
+            }
+            else return null;
+        }
+
         void SimulateBrowsing(string url)
         {
             UserAgent browserHeader = GetRandomBrowser();
-            //Proxy countryProxy = GetRandomProxy();
+            SimulateRandomCountry();
             OpenUrl(url, browserHeader);
             SimulateReading();
+        }
+
+        private void SimulateRandomCountry()
+        {
+            if (chkConfigSimulateCountries.Checked)
+            {
+                int randIndex = new Random().Next(0, ProxyChoices.Count);
+                if (randIndex != ProxyChoices.Count)
+                {
+                    Proxy countryProxy = ProxyChoices[randIndex];
+                    Proxy.SetConnection(countryProxy.Connection);
+                    Log(WHITESPACE_S + "Country: " + countryProxy.Country + " @" + countryProxy.Ip);
+                }
+                else Log(WHITESPACE_S + "Country: local machine");
+            }
         }
 
         private void SimulateReading()
@@ -191,16 +220,6 @@ namespace WebbyTraffy
             Log(string.Format(" done{0}({1}s)", WHITESPACE_M, Math.Truncate(watch.Elapsed.TotalSeconds)), true);
         }
 
-        private UserAgent GetRandomBrowser()
-        {
-            if (chkConfigSimulateBrowser.Checked)
-            {
-                int randIndex = new Random().Next(0, BrowserChoices.Length - 1);
-                return BrowserChoices[randIndex];
-            }
-            else return null;
-        }
-
         /// <summary>
         /// Find alert boxes and simulate a press on "OK" or "Continue".
         /// </summary>
@@ -250,6 +269,7 @@ namespace WebbyTraffy
                 Application.DoEvents();
             }
 
+            Proxy.ResetSettings();
             SaveConfigs();
             Log("Shutting down...");
         }
@@ -280,6 +300,23 @@ namespace WebbyTraffy
                 {
                     Stream file = openFileDialog.OpenFile();
                     LoadUrls(file);
+                }
+            }
+            catch (Exception error)
+            {
+                ShowAndLogErrorMsg("Could not open the file.", error.Message);
+            }
+        }
+
+        private void btnFileProxies_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DialogResult result = openFileDialog.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    Stream file = openFileDialog.OpenFile();
+                    LoadProxies(file);
                 }
             }
             catch (Exception error)
@@ -482,6 +519,8 @@ namespace WebbyTraffy
         private void ResetCounters()
         {
             _totalLoops = _totalVisits = 0;
+            RefreshTotalLoops(0);
+            RefreshTotalVisits(0);
         }
 
         // URLs
@@ -495,9 +534,9 @@ namespace WebbyTraffy
             try
             {
                 _urlsToVisit.Clear();
-                Log("Cleared URL calling list.");
 
                 Log("Loading URLs...");
+                Cursor.Current = Cursors.WaitCursor;
                 using (StreamReader fileReader = new StreamReader(file))
                 {
                     while ((line = fileReader.ReadLine()) != null)
@@ -534,6 +573,7 @@ namespace WebbyTraffy
             }
             finally
             {
+                Cursor.Current = Cursors.Default;
                 file.Close();
                 RefreshTotalUrls();
             }
@@ -578,9 +618,54 @@ namespace WebbyTraffy
 
         // Proxies
 
-        private void LoadProxies(Stream fileStream)
+        private void LoadProxies(Stream file)
         {
-            //TODO
+            int numValidProxies = 0;
+            bool hasInvalidProxies = false;
+            string line;
+
+            try
+            {
+                ProxyChoices.Clear();
+
+                Log("Loading proxies...");
+                Cursor.Current = Cursors.WaitCursor;
+                using (StreamReader fileReader = new StreamReader(file))
+                {
+                    while ((line = fileReader.ReadLine()) != null)
+                    {
+                        line = line.Trim();
+                        if (IsEmptyOrComment(line)) continue;
+
+                        string[] parsedLine = line.Split('|');
+                        try
+                        {
+                            Proxy inputProxy = new Proxy(parsedLine[0].Trim(), parsedLine[1].Trim());
+                            ProxyChoices.Add(inputProxy);
+                            numValidProxies++;
+                        }
+                        catch (Exception)
+                        {
+                            hasInvalidProxies = true;
+                            Log(WHITESPACE_S + "Not a valid proxy: " + line);
+                        }
+                    }
+                }
+
+                if (hasInvalidProxies)
+                    ShowAndLogErrorMsg("Some proxies were invalid, only " + numValidProxies + " were correctly loaded.");
+                else
+                    Log("Loaded " + numValidProxies + " valid proxies.");
+            }
+            catch (Exception error)
+            {
+                ShowAndLogErrorMsg("Could not read the contents of the file due to an error.", error.Message);
+            }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
+                file.Close();
+            }
         }
 
         // Logging
@@ -588,6 +673,9 @@ namespace WebbyTraffy
         private void Log(string text, bool addNewLine = true)
         {
             txtLogger.AppendText(text + (addNewLine ? Environment.NewLine : string.Empty));
+
+            txtLogger.Select(txtLogger.Text.Length - 1, 0);
+            txtLogger.ScrollToCaret();
         }
 
         private void ShowAndLogErrorMsg(string userMessage, string detailMessage = "")
@@ -605,31 +693,4 @@ namespace WebbyTraffy
 
         #endregion
     }
-
-    #region DomainModel classes
-
-    /// <summary>
-    /// Contains UserAgent strings. Check http://www.useragentstring.com/pages/All/.
-    /// </summary>
-    public class UserAgent
-    {
-        public string Name;
-        public string UserAgentStr;
-
-        public UserAgent(string name, string headerUserAgent)
-        {
-            Name = name;
-            UserAgentStr = headerUserAgent;
-        }
-
-        public static UserAgent CHROME { get { return new UserAgent("Chrome", "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36"); } }
-        public static UserAgent SAFARI { get { return new UserAgent("Safari", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.75.14 (KHTML, like Gecko) Version/7.0.3 Safari/7046A194A"); } }
-        public static UserAgent FIREFOX { get { return new UserAgent("Firefox", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.1"); } }
-        public static UserAgent IEXPLORER { get { return new UserAgent("IE", "Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; AS; rv:11.0) like Gecko"); } }
-        public static UserAgent SEAMONKEY { get { return new UserAgent("SeaMonkey", "Mozilla/5.0 (Windows NT 5.2; RW; rv:7.0a1) Gecko/20091211 SeaMonkey/9.23a1pre"); } }
-        public static UserAgent KONQUEROR { get { return new UserAgent("Konqueror", "Mozilla/5.0 (X11; Linux) KHTML/4.9.1 (like Gecko) Konqueror/4.9"); } }
-        public static UserAgent OPERA { get { return new UserAgent("Opera", "Opera/9.80 (X11; Linux i686; Ubuntu/14.10) Presto/2.12.388 Version/12.16"); } }
-    }
-    
-    #endregion
 }
