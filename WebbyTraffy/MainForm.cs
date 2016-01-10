@@ -101,171 +101,6 @@ namespace WebbyTraffy
             btnAction.Text = "Stopping...";
         }
 
-        #region Validations
-
-        private bool ValidateConfigs()
-        {
-            //if (int.TryParse(spinAvgReadTime.Value)
-            //{
-            //    ShowInfoMsg("Please make sure your configurations are correct.");
-            //    spinAvgReadTime.Focus();
-            //}
-
-            return true;
-        }
-
-        private bool IsEmptyOrComment(string line)
-        {
-            if (string.IsNullOrEmpty(line))
-                return true;
-            else if (line.StartsWith("//") || line.StartsWith("#"))
-                return true;
-            else
-                return false;
-        }
-
-        #endregion
-
-        #region Events
-
-        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            while (_internalState == State.Running)
-            {
-                SignalToStopRunning();
-                Application.DoEvents();
-            }
-
-            SaveConfigs();
-            Log("Shutting down...");
-        }
-
-        #endregion
-        #region Buttons
-
-        private void btnActionBrowser_Click(object sender, EventArgs e)
-        {
-            switch (_internalState)
-            {
-                case State.Stopped:
-                    if (ValidateConfigs() == false) return;
-                    StartRunning();
-                    break;
-                case State.Running:
-                    SignalToStopRunning();
-                    break;
-            }
-        }
-
-        private void btnFileUrls_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                DialogResult result = openFileDialog.ShowDialog();
-                if (result == DialogResult.OK)
-                {
-                    Stream file = openFileDialog.OpenFile();
-                    LoadUrls(file);
-                }
-            }
-            catch (Exception error)
-            {
-                ShowAndLogErrorMsg("Could not open the file.", error.Message);
-            }
-        }
-
-        private void lblTotalUrls_Click(object sender, EventArgs e)
-        {
-            DisplayUrlsToCall();
-        }
-
-        private void lblUrlsToCall_Click(object sender, EventArgs e)
-        {
-            DisplayUrlsToCall();
-        }
-
-        #endregion
-
-        #region UI
-
-        private void RefreshActionButton()
-        {
-            switch (_internalState)
-            {
-                case State.Stopped:
-                    btnAction.Text = "START!";
-                    btnAction.Image = Properties.Resources.Play;
-                    break;
-                case State.Running:
-                    btnAction.Text = "Stop";
-                    btnAction.Image = Properties.Resources.Stop;
-                    break;
-            }
-        }
-
-        private void RefreshTotalUrls()
-        {
-            lblTotalUrlsToVisit.Text = lblTotalUrlsToVisit.Tag.ToString() + _urlsToVisit.Count;
-        }
-
-        private void RefreshTotalLoops(int increment)
-        {
-            _totalLoops += increment;
-            lblTotalLoops.Text = lblTotalLoops.Tag.ToString() + _totalLoops.ToString();
-        }
-
-        private void RefreshTotalVisits(int increment)
-        {
-            _totalVisits += increment;
-            lblTotalVisits.Text = lblTotalVisits.Tag.ToString() + _totalVisits.ToString();
-        }
-
-        private void DisplayUrlsToCall()
-        {
-            StringBuilder str = new StringBuilder();
-            foreach (Uri url in _urlsToVisit)
-            {
-                str.AppendLine(url.ToString());
-            }
-
-            if (str.Length > 0)
-            {
-                Log(LINE_THIN);
-                Log("URLs that will be visited:");
-                Log(str.ToString(), false);
-                Log(LINE_THIN);
-            }
-            else ShowInfoMsg("You should load a file containing the URLs to be called by this app.");
-        }
-
-        public string DisplayOrdinal(int number)
-        {
-            if (number <= 0) return number.ToString();
-
-            switch (number % 100)
-            {
-                case 11:
-                case 12:
-                case 13:
-                    return number + "th";
-            }
-
-            switch (number % 10)
-            {
-                case 1:
-                    return number + "st";
-                case 2:
-                    return number + "nd";
-                case 3:
-                    return number + "rd";
-                default:
-                    return number + "th";
-            }
-
-        }
-
-        #endregion
-
         #region Simulation methods
 
         void SimulateBrowsing(string url)
@@ -355,7 +190,7 @@ namespace WebbyTraffy
             watch.Stop();
             Log(string.Format(" done{0}({1}s)", WHITESPACE_M, Math.Truncate(watch.Elapsed.TotalSeconds)), true);
         }
-        
+
         private UserAgent GetRandomBrowser()
         {
             if (chkConfigSimulateBrowser.Checked)
@@ -380,14 +215,171 @@ namespace WebbyTraffy
 
         #endregion
 
-        #region Helper methods
+        #region Validations
 
-        private void ResetCounters()
+        private bool ValidateConfigs()
         {
-            _totalLoops = _totalVisits = 0;
+            //if (int.TryParse(spinAvgReadTime.Value)
+            //{
+            //    ShowInfoMsg("Please make sure your configurations are correct.");
+            //    spinAvgReadTime.Focus();
+            //}
+
+            return true;
         }
 
-        // Configs
+        private bool IsEmptyOrComment(string line)
+        {
+            if (string.IsNullOrEmpty(line))
+                return true;
+            else if (line.StartsWith("//") || line.StartsWith("#"))
+                return true;
+            else
+                return false;
+        }
+
+        #endregion
+
+        #region Events
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            while (_internalState == State.Running)
+            {
+                SignalToStopRunning();
+                Application.DoEvents();
+            }
+
+            SaveConfigs();
+            Log("Shutting down...");
+        }
+
+        #endregion
+        #region Buttons
+
+        private void btnActionBrowser_Click(object sender, EventArgs e)
+        {
+            switch (_internalState)
+            {
+                case State.Stopped:
+                    if (ValidateConfigs() == false) return;
+                    StartRunning();
+                    break;
+                case State.Running:
+                    SignalToStopRunning();
+                    break;
+            }
+        }
+
+        private void btnFileUrls_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DialogResult result = openFileDialog.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    Stream file = openFileDialog.OpenFile();
+                    LoadUrls(file);
+                }
+            }
+            catch (Exception error)
+            {
+                ShowAndLogErrorMsg("Could not open the file.", error.Message);
+            }
+        }
+
+        private void lblTotalUrls_Click(object sender, EventArgs e)
+        {
+            DisplayUrlsToCall();
+        }
+
+        private void lblUrlsToCall_Click(object sender, EventArgs e)
+        {
+            DisplayUrlsToCall();
+        }
+
+        #endregion
+        #region UI
+
+        private void RefreshActionButton()
+        {
+            switch (_internalState)
+            {
+                case State.Stopped:
+                    btnAction.Text = "START!";
+                    btnAction.Image = Properties.Resources.Play;
+                    break;
+                case State.Running:
+                    btnAction.Text = "Stop";
+                    btnAction.Image = Properties.Resources.Stop;
+                    break;
+            }
+        }
+
+        private void RefreshTotalUrls()
+        {
+            lblTotalUrlsToVisit.Text = lblTotalUrlsToVisit.Tag.ToString() + _urlsToVisit.Count;
+        }
+
+        private void RefreshTotalLoops(int increment)
+        {
+            _totalLoops += increment;
+            lblTotalLoops.Text = lblTotalLoops.Tag.ToString() + _totalLoops.ToString();
+        }
+
+        private void RefreshTotalVisits(int increment)
+        {
+            _totalVisits += increment;
+            lblTotalVisits.Text = lblTotalVisits.Tag.ToString() + _totalVisits.ToString();
+        }
+
+        private void DisplayUrlsToCall()
+        {
+            StringBuilder str = new StringBuilder();
+            foreach (Uri url in _urlsToVisit)
+            {
+                str.AppendLine(url.ToString());
+            }
+
+            if (str.Length > 0)
+            {
+                Log(LINE_THIN);
+                Log("URLs that will be visited:");
+                Log(str.ToString(), false);
+                Log(LINE_THIN);
+            }
+            else ShowInfoMsg("You should load a file containing the URLs to be called by this app.");
+        }
+
+        public string DisplayOrdinal(int number)
+        {
+            if (number <= 0) return number.ToString();
+
+            switch (number % 100)
+            {
+                case 11:
+                case 12:
+                case 13:
+                    return number + "th";
+            }
+
+            switch (number % 10)
+            {
+                case 1:
+                    return number + "st";
+                case 2:
+                    return number + "nd";
+                case 3:
+                    return number + "rd";
+                default:
+                    return number + "th";
+            }
+
+        }
+
+        #endregion
+
+        #region Config methods
 
         private void LoadLastConfigs()
         {
@@ -400,7 +392,7 @@ namespace WebbyTraffy
 
                 Log(WHITESPACE_S + "Attempting to load \"Proxies.txt\" file.");
                 if (File.Exists("Proxies.txt"))
-                    LoadUrls(File.Open("Proxies.txt", FileMode.Open));
+                    LoadProxies(File.Open("Proxies.txt", FileMode.Open));
 
                 // ========================
                 // Import last used configs
@@ -482,6 +474,14 @@ namespace WebbyTraffy
                 configFile.AppSettings.Settings[key].Value = value;
                 configFile.Save();
             }
+        }
+
+        #endregion
+        #region Helper methods
+
+        private void ResetCounters()
+        {
+            _totalLoops = _totalVisits = 0;
         }
 
         // URLs
@@ -574,6 +574,13 @@ namespace WebbyTraffy
                 web.Headers.Add("user-agent", hearderUserAgent);
 
             return web.DownloadString(url);
+        }
+
+        // Proxies
+
+        private void LoadProxies(Stream fileStream)
+        {
+            //TODO
         }
 
         // Logging

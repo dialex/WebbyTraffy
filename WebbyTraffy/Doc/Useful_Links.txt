@@ -13,6 +13,4 @@ http://www.xroxy.com/proxylist.htm
 Ficheiro com lista de proxies a usar: COUNTRY_CODE|IP|PORT
 Proxies.txt
 
-
 Simulate Proxies
-Usar ultimas definicoes (gravar/ler do app.config)
