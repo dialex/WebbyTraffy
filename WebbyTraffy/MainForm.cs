@@ -16,11 +16,14 @@ namespace WebbyTraffy
         #region Data
 
         public enum State { Running, Stopped };
+
         public static UserAgent[] BrowserChoices = { UserAgent.CHROME, UserAgent.SAFARI, UserAgent.FIREFOX, UserAgent.IEXPLORER };
         public static List<Proxy> ProxyChoices;
 
         #endregion
         #region Constants
+
+        private static readonly int DOWNLOAD_TIMEOUT = 30;
 
         private static readonly char LINE_THIN_CHAR = '-';
         private static readonly char LINE_STRONG_CHAR = '#';
@@ -34,7 +37,7 @@ namespace WebbyTraffy
 
         private static readonly int VISIT_TIME_MINVALID = 10;  //seconds
 
-        private State _internalState;
+        private State _currentState;
         private int _totalVisits;
         private int _totalLoops;
         private List<Uri> _urlsToVisit;
@@ -52,7 +55,7 @@ namespace WebbyTraffy
         {
             Log("Initializing...");
             ResetCounters();
-            _internalState = State.Stopped;
+            _currentState = State.Stopped;
             _urlsToVisit = new List<Uri>();
             ProxyChoices = new List<Proxy>();
 
@@ -62,7 +65,7 @@ namespace WebbyTraffy
 
         private void StartRunning()
         {
-            _internalState = State.Running;
+            _currentState = State.Running;
             RefreshActionButton();
             ResetCounters();
 
@@ -77,7 +80,7 @@ namespace WebbyTraffy
                     foreach (Uri url in _urlsToVisit)
                     {
                         // If a stop signal was sent meanwhile, it's time to stop
-                        if (_internalState == State.Stopped) { RefreshActionButton(); return; }
+                        if (_currentState == State.Stopped) { RefreshActionButton(); return; }
 
                         Log(string.Format("{0} Action: {1} - Url {2} is being visited by the {3} time.",
                             new string(LINE_STRONG_CHAR, 5), _totalVisits + 1, ++urlIndex, DisplayOrdinal(_totalLoops + 1)));
@@ -101,7 +104,7 @@ namespace WebbyTraffy
 
         private void SignalToStopRunning()
         {
-            _internalState = State.Stopped;
+            _currentState = State.Stopped;
             btnAction.Text = "Stopping...";
         }
 
@@ -150,7 +153,7 @@ namespace WebbyTraffy
             Log("Reading", false);
             Stopwatch watch = Stopwatch.StartNew();
 
-            while (_internalState == State.Running)
+            while (_currentState == State.Running)
             {
                 TimeSpan passedTime = watch.Elapsed;
 
@@ -205,7 +208,7 @@ namespace WebbyTraffy
 
             Log("Waiting next visitor...", false);
             Stopwatch watch = Stopwatch.StartNew();
-            while (_internalState == State.Running)
+            while (_currentState == State.Running)
             {
                 TimeSpan passedTime = watch.Elapsed;
 
@@ -263,7 +266,7 @@ namespace WebbyTraffy
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            while (_internalState == State.Running)
+            while (_currentState == State.Running)
             {
                 SignalToStopRunning();
                 Application.DoEvents();
@@ -279,7 +282,7 @@ namespace WebbyTraffy
 
         private void btnActionBrowser_Click(object sender, EventArgs e)
         {
-            switch (_internalState)
+            switch (_currentState)
             {
                 case State.Stopped:
                     if (ValidateConfigs() == false) return;
@@ -340,7 +343,7 @@ namespace WebbyTraffy
 
         private void RefreshActionButton()
         {
-            switch (_internalState)
+            switch (_currentState)
             {
                 case State.Stopped:
                     btnAction.Text = "START!";
@@ -597,7 +600,9 @@ namespace WebbyTraffy
             while (webBrowser.ReadyState != WebBrowserReadyState.Complete)
             {
                 // If a stop signal was sent meanwhile, it's time to stop
-                if (_internalState == State.Stopped) { RefreshActionButton(); return; }
+                if (_currentState == State.Stopped) { RefreshActionButton(); return; }
+
+                if (watch.Elapsed.Seconds > DOWNLOAD_TIMEOUT) { Log("timeout"); return; }
 
                 Application.DoEvents();
             }
