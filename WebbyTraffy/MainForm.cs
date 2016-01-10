@@ -123,12 +123,12 @@ namespace WebbyTraffy
         void SimulateBrowsing(string url)
         {
             UserAgent browserHeader = GetRandomBrowser();
-            SimulateRandomCountry();
-            OpenUrl(url, browserHeader);
+            Proxy currentProxy = SimulateRandomCountry();
+            OpenUrl(url, browserHeader, currentProxy);
             SimulateReading();
         }
 
-        private void SimulateRandomCountry()
+        private Proxy SimulateRandomCountry()
         {
             if (chkConfigSimulateCountries.Checked)
             {
@@ -137,10 +137,11 @@ namespace WebbyTraffy
                 {
                     Proxy countryProxy = ProxyChoices[randIndex];
                     Proxy.SetConnection(countryProxy.Connection);
-                    Log(WHITESPACE_S + "Country: " + countryProxy.Country + " @" + countryProxy.Ip);
+                    return countryProxy;
                 }
-                else Log(WHITESPACE_S + "Country: local machine");
+                else return null;
             }
+            else return null;
         }
 
         private void SimulateReading()
@@ -526,9 +527,23 @@ namespace WebbyTraffy
             RefreshTotalVisits(0);
         }
 
+        private void ShuffleList(List<Uri> list)
+        {
+            Random randGen = new Random(DateTime.Now.Millisecond);
+            int n = list.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = randGen.Next(n + 1);
+                Uri value = list[k];
+                list[k] = list[n];
+                list[n] = value;
+            }
+        }
+
         // URLs
 
-        private void LoadUrls(Stream file)
+        private void LoadUrls(Stream file, bool shuffle = true)
         {
             int numValidUrls = 0;
             bool hasInvalidUrls = false;
@@ -565,6 +580,8 @@ namespace WebbyTraffy
                     }
                 }
 
+                if (shuffle) ShuffleList(_urlsToVisit);
+
                 if (hasInvalidUrls)
                     ShowAndLogErrorMsg("Some URLs were invalid, only " + numValidUrls + " were correctly loaded.");
                 else
@@ -582,11 +599,16 @@ namespace WebbyTraffy
             }
         }
 
-        private void OpenUrl(string url, UserAgent mockBrowser = null)
+        private void OpenUrl(string url, UserAgent mockBrowser = null, Proxy mockCountry = null)
         {
             Log("Browsing: " + url);
+
+            if (mockCountry != null) Log(WHITESPACE_S + "Country: " + mockCountry.Country + " @" + mockCountry.Ip);
+            else Log(WHITESPACE_S + "Country: local machine");
+
             if (mockBrowser == null)
             {
+                Log(WHITESPACE_S + "UserAgent: local machine");
                 webBrowser.Navigate(url);
             }
             else
