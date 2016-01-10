@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -51,11 +52,6 @@ namespace WebbyTraffy
             ResetCounters();
             _internalState = State.Stopped;
             _urlsToVisit = new List<Uri>();
-
-            // Set default configs
-            chkConfigSimulateBrowser.Checked = true;
-            chkConfigSimulateCountries.Checked = true;
-            spinAvgReadTime.Minimum = VISIT_TIME_MINVALID;
 
             LoadLastConfigs();
         }
@@ -395,16 +391,35 @@ namespace WebbyTraffy
 
         private void LoadLastConfigs()
         {
-            // Import last used configs
+            string lastUsedConfig;
             try
             {
                 Log(WHITESPACE_S + "Attempting to load \"Urls.txt\" file.");
                 if (File.Exists("Urls.txt"))
                     LoadUrls(File.Open("Urls.txt", FileMode.Open));
 
-                //Log("Attempting to load \"Proxies.txt\" file.");
-                //if (File.Exists("Urls.txt"))
-                //    LoadUrls(File.Open("Urls.txt", FileMode.Open));
+                Log(WHITESPACE_S + "Attempting to load \"Proxies.txt\" file.");
+                if (File.Exists("Proxies.txt"))
+                    LoadUrls(File.Open("Proxies.txt", FileMode.Open));
+
+                // ========================
+                // Import last used configs
+                // ========================
+
+                lastUsedConfig = ReadConfigValue("UseProxies");
+                chkConfigSimulateCountries.Checked = (lastUsedConfig != null) ? Convert.ToBoolean(lastUsedConfig) : true;
+
+                lastUsedConfig = ReadConfigValue("MockBrowsers");
+                chkConfigSimulateBrowser.Checked = (lastUsedConfig != null) ? Convert.ToBoolean(lastUsedConfig) : true;
+
+                lastUsedConfig = ReadConfigValue("NumVisits");
+                spinNumberLoops.Value = (lastUsedConfig != null) ? Convert.ToInt32(lastUsedConfig) : 100;
+
+                lastUsedConfig = ReadConfigValue("RunTime");
+                spinLoopDuration.Value = (lastUsedConfig != null) ? Convert.ToInt32(lastUsedConfig) : 480;
+
+                lastUsedConfig = ReadConfigValue("VisitTime");
+                spinAvgReadTime.Value = (lastUsedConfig != null) ? Convert.ToInt32(lastUsedConfig) : VISIT_TIME_MINVALID;
             }
             catch (Exception error)
             {
@@ -412,16 +427,60 @@ namespace WebbyTraffy
             }
         }
 
+        /// <summary>
+        /// Saves current configs persistenly, for next run.
+        /// </summary>
         private void SaveConfigs()
         {
-            // Saving current configs persistenly
             try
             {
-                throw new NotImplementedException("TODO");
+                WriteConfigValue("UseProxies", chkConfigSimulateCountries.Checked.ToString());
+                WriteConfigValue("MockBrowsers", chkConfigSimulateBrowser.Checked.ToString());
+                WriteConfigValue("NumVisits", spinNumberLoops.Value.ToString());
+                WriteConfigValue("RunTime", spinLoopDuration.Value.ToString());
+                WriteConfigValue("VisitTime", spinAvgReadTime.Value.ToString());
             }
             catch (Exception error)
             {
                 ShowAndLogErrorMsg("Something went wrong while saving your current configurations.", error.Message);
+            }
+        }
+
+        /// <summary>
+        /// Reads value from App.config file.
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        private string ReadConfigValue(string key)
+        {
+            try
+            {
+                return ConfigurationManager.AppSettings[key];
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Writes value to App.config file.
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        private void WriteConfigValue(string key, string value)
+        {
+            Configuration configFile = ConfigurationManager.OpenExeConfiguration(Application.ExecutablePath);
+
+            if (ReadConfigValue(key) == null)
+            {
+                configFile.AppSettings.Settings.Add(key, value);
+                configFile.Save(ConfigurationSaveMode.Modified);
+            }
+            else
+            {
+                configFile.AppSettings.Settings[key].Value = value;
+                configFile.Save();
             }
         }
 

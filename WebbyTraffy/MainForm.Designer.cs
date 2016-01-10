@@ -238,7 +238,7 @@
             this.spinNumberLoops.TabIndex = 21;
             this.spinNumberLoops.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.spinNumberLoops.Value = new decimal(new int[] {
-            100,
+            1,
             0,
             0,
             0});
@@ -262,7 +262,7 @@
             this.spinLoopDuration.TabIndex = 20;
             this.spinLoopDuration.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.spinLoopDuration.Value = new decimal(new int[] {
-            480,
+            1,
             0,
             0,
             0});
@@ -322,7 +322,7 @@
             this.spinAvgReadTime.TabIndex = 0;
             this.spinAvgReadTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.spinAvgReadTime.Value = new decimal(new int[] {
-            60,
+            1,
             0,
             0,
             0});
