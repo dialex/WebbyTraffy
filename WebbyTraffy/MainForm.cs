@@ -54,6 +54,7 @@ namespace WebbyTraffy
         private void Init()
         {
             Log("Initializing...");
+            SoundHandler.SetVolume(0);
             ResetCounters();
             _currentState = State.Stopped;
             _urlsToVisit = new List<Uri>();
