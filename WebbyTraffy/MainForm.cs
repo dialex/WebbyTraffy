@@ -90,6 +90,8 @@ namespace WebbyTraffy
                     }
                     RefreshTotalLoops(1);
                 }
+                ShowInfoMsg("Execution finished.");
+                Log("Execution finished.");
             }
             catch (Exception error)
             {
