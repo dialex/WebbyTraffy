@@ -1,6 +1,0 @@
-﻿mudar de webbrowser
-http://www.codeproject.com/Tips/825526/Csharp-WebBrowser-vs-Gecko-vs-Awesomium-vs-OpenWeb
-
-proxy por país:
-http://proxylist.hidemyass.com/
-https://incloak.com/proxy-list

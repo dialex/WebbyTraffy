@@ -89,10 +89,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Doc\Adfly_Rules.md" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Doc\Useful_Links.txt" />
     <Content Include="Proxies.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -100,11 +96,13 @@
     <None Include="Resources\Stop.png" />
     <None Include="Resources\Play.png" />
     <None Include="Resources\AppIco.ico" />
-    <Content Include="Resources\AppIco.png" />
     <Content Include="Urls.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="Resources\ajax-loader.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Doc\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

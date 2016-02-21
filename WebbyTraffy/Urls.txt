@@ -1,10 +1,5 @@
-﻿// Blog
-//http://www.diogonunes.com/blog/too-weird-to-live-too-unique-to-die/
+﻿// This is a comment
+http://www.diogonunes.com
 
-# Adfly
-http://adf.ly/10475475/gmod-textures
-http://adf.ly/10475475/gmod-maps
-http://adf.ly/10475475/livro-fantasia-epub
-http://adf.ly/10475475/livro-fantasia-pdf
-http://adf.ly/10475475/livro-poesia-excerto
-http://adf.ly/1U1HtX
+# Below is an example of a valid URL
+https://www.google.pt/search?q=asdf
